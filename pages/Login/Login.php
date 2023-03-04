@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,9 +32,6 @@
        if(isset($_POST['btnSubmit'])){
         
         if(isset($_POST['email']) and isset($_POST['password'])){
-
-        $_SESSION['email']=$_POST['email'];
-        $_SESSION['password']=$_POST['password'];
         $email=$_POST['email'];
         $password=$_POST['password'];
 
@@ -47,7 +47,9 @@
             echo "Account does not exist. Please SignUp <b><a href='../SignUp/SignUp.php'>here</a></b>";
         }else{
             $_SESSION['loggedin']=true;
-            $_SESSION['iduser']=$rez; //stavio sam u query da proveri da li postoji lik i da uzmem id toga da bi na landing page uspeo da ga prosledim kao id i po njemu da prikazujem podatke i bice globalan
+            $row=mysqli_fetch_array($rez,MYSQLI_ASSOC);
+            $_SESSION['iduser']=$row['user_id']; //stavio sam u query da proveri da li postoji lik i da uzmem id toga da bi na landing page uspeo da ga prosledim kao id i po njemu da prikazujem podatke i bice globalan
+            echo gettype($_SESSION['iduser']);
             header('Location: ../profile.php');
             exit;
         }
