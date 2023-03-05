@@ -134,14 +134,15 @@ class User{
 
 }
 class Post{
-    public $db;
+    public $dbc;
     public $userid;
     public $datetime;
     public $caption;
     public $category;
    // public $uploaded_file;
     
-    function _construct($userid,$caption,$category){
+    function __construct($db,$userid,$caption,$category){
+        $this->dbc=$db;
         $this->userid=$userid;
         $this->caption=$caption;
         $this->category=$category;
@@ -149,11 +150,51 @@ class Post{
     }
 
     function loadtodatabase(){
-        
-
-
+         
+        $query = $this->dbc->prepare("CALL addpost(?, ?, ?)");
+        $query->bind_param("iss", $this->userid, $this->caption, $this->category);
+        $query->execute();
+      
+        // $query="CALL addpost({$this->userid},{$this->caption},{$this->category})";
+        // mysqli_query($this->dbc,$query);
+        // mysqli_error($this->dbc); //nmp sto ovo nije htelo da radi mjkmi
         
     }
+
+    public static function getpost($idpost,$dbc){
+        $query=$dbc->prepare("CALL getpost(?)");
+        $query->bind_param("i",$idpost);
+        $query->execute();
+        $res=$query->get_result();
+      while( $row=mysqli_fetch_assoc($res)){
+        $topic=$row['category'];
+       $time=$row['created_datetime'];
+       $txt=$row['caption'];
+       $htmlanswer="";
+        $htmlanswer.="<div>
+        <h3>{$topic}</h3><br>
+        {$txt}<br>
+        {$time};
+        </div>";
+        echo $htmlanswer;
+      }
+
+
+    //    $topic=$row['category'];
+    //    $time=$row['created_datetime'];
+    //    $txt=$row['caption'];
+    //    echo gettype($topic);
+    //    echo $topic;
+    //    $htmlanswer="";
+    //     $htmlanswer.="<div>
+    //     <h3>{$topic}</h3><br>
+    //     {$txt}<br>
+    //     {$time};
+    //     </div>";
+    //     return $htmlanswer;
+      
+    }
+
 }
 
 

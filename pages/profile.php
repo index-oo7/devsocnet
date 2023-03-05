@@ -26,7 +26,7 @@
         
         ?>
     </div>
-    <div class="posts" style="float:left;width:400px;background:lightblue">
+    <div class="posts" style="float:left;width:900px;background:lightblue">
                 <div>
                     <form action="profile.php" method="post" enctype="multipart/form-data">
                     <input type="text" name="category" id="category" placeholder="Topic"><button name="postit" type="submit">Post</button>
@@ -34,13 +34,14 @@
                     <input type="file" name="file" id="file">
                     </form>
                     <?php
+
+                        
                         if(isset($_POST['postit'])){
                             $category=$_POST['category'];
                             $caption = $_POST['caption'];
-                            $userid=$_SESSION['userid'];
-
-                            $newpost= new Post($userid,$caption,$category);
-
+                            $userid=$_SESSION['iduser'];
+                            $newpost= new Post($db,$userid,$caption,$category);
+                            
 
 
 
@@ -50,7 +51,17 @@
                     
                     ?>
                 </div>
-                
+                <div>
+                        <h1>Your posts</h1>
+                        <?php
+                            $arr_posts=[2,6,7,8];//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
+
+                            foreach($arr_posts as $el){
+                              post::getpost($el,$db);
+                            }
+                        ?>
+                </div>
+
 
     </div>
 </body>
