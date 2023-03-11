@@ -2,8 +2,8 @@
     session_start();
     include("../models/classes.php");
     $datab= new Database();
-    $db=$datab->connect();
-    $user=new User($db,$_SESSION['iduser']);
+   
+    $user=new User($datab,$_SESSION['iduser']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +11,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DevSocNet</title>
 </head>
 <body>
     <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
+    
     <div class="about" style="background:gray; width:200px">
         <?php
            
@@ -40,11 +41,7 @@
                             $category=$_POST['category'];
                             $caption = $_POST['caption'];
                             $userid=$_SESSION['iduser'];
-                            $newpost= new Post($db,$userid,$caption,$category);
-                            
-
-
-
+                            $newpost= new Post($datab,$userid,$caption,$category);
                         }
                     
                     
@@ -54,11 +51,14 @@
                 <div>
                         <h1>Your posts</h1>
                         <?php
-                            $arr_posts=[2,6,7,8];//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
+                            
+                            $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
 
                             foreach($arr_posts as $el){
-                              post::getpost($el,$db);
+                              post::getpost($el,$datab);
                             }
+                           
+
                         ?>
                 </div>
 

@@ -34,9 +34,9 @@ class User{
      public $password;
      public $info;
 
-    public function __construct($db,$id){
+    public function __construct($datab,$id){
         $this->id = $id;
-        $this->db = $db;
+        $this->db = $datab->connect();
         $this->loadData();
     }
     
@@ -59,7 +59,7 @@ class User{
         }
         
     }
-
+            $this->db->close();
     }
 
     public function getName() {
@@ -121,14 +121,15 @@ class User{
         $this->info = $info;
     }
     //funkcija za sve njegove postove ili to da bude funkcija u sql 
-    function allposts(){
+    function allposts($datab){
+        $dbc=$datab->connect();
         $posts=array();
         $query="call posts_procedure({$this->id})";
-        $res=mysqli_query($this->db,$query);
+        $res=mysqli_query($dbc,$query);
         while($row = mysqli_fetch_assoc($res)){
             $posts[]=$row['post_id'];
         }
-
+        $dbc->close();
         return $posts;
     }
 
@@ -141,8 +142,8 @@ class Post{
     public $category;
    // public $uploaded_file;
     
-    function __construct($db,$userid,$caption,$category){
-        $this->dbc=$db;
+    function __construct($datab,$userid,$caption,$category){
+        $this->dbc=$datab->connect();
         $this->userid=$userid;
         $this->caption=$caption;
         $this->category=$category;
@@ -161,7 +162,8 @@ class Post{
         
     }
 
-    public static function getpost($idpost,$dbc){
+    public static function getpost($idpost,$datab){
+        $dbc=$datab->connect();
         $query=$dbc->prepare("CALL getpost(?)");
         $query->bind_param("i",$idpost);
         $query->execute();
@@ -177,8 +179,9 @@ class Post{
         {$time};
         </div>";
         echo $htmlanswer;
-      }
 
+      }
+        $dbc->close();
 
     //    $topic=$row['category'];
     //    $time=$row['created_datetime'];
