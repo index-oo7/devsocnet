@@ -1,0 +1,28 @@
+.profile-pic img {
+    border-radius: 50%;
+  }
+  
+  .profile-info h1 {
+    margin-top: 0;
+  }
+  
+  .profile-info h2 {
+    font-weight: normal;
+    margin-top: 10px;
+  }
+  
+  .profile-info p {
+    margin-bottom: 0;
+  }
+  
+  .profile-info ul li {
+    margin-bottom: 5px;
+  }
+  
+  .profile-info ul li strong {
+    margin-right: 5px;
+  }
+  
+  .lblProfile{
+    font-weight: bolder;
+  }

@@ -50,7 +50,7 @@
             $row=mysqli_fetch_array($rez,MYSQLI_ASSOC);
             $_SESSION['iduser']=$row['user_id']; //stavio sam u query da proveri da li postoji lik i da uzmem id toga da bi na landing page uspeo da ga prosledim kao id i po njemu da prikazujem podatke i bice globalan
             echo gettype($_SESSION['iduser']);
-            header('Location: ../profile.php');
+            header('Location: ../Profile/profile.php');
             exit;
         }
        }
