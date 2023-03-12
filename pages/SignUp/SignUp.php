@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>SignUp</title>
 </head>
@@ -22,7 +23,7 @@
           <button type="submit" name="btnSubmit">Sign Up</button>
         </form>
       </div>
-            <!--AUTOGENERISANJE USERNAME  -->
+            <!--AUTOGENERATING USERNAME  -->
       <?php
         if(isset($_POST['firstName'])and isset($_POST['lastName']) and isset($_POST['email']) and isset($_POST['password'])){
 
