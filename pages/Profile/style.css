@@ -1,7 +1,14 @@
 .profile-pic img {
     border-radius: 50%;
+    margin: 20px;
+    margin-left: 150px;
+    margin-top: 40px;
   }
-  
+  .profile-info{
+    padding: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+  }
+
   .profile-info h1 {
     margin-top: 0;
   }
@@ -25,4 +32,18 @@
   
   .lblProfile{
     font-weight: bolder;
+  }
+
+  .header{
+    background-color: bisque;
+    border-radius: 30px;
+  }
+
+  .post{
+    box-shadow: inset;
+  }
+
+  #btnEdit{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    border-radius: 15px;
   }
