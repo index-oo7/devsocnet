@@ -48,36 +48,46 @@
           </div>
         </div>
       </div>
-    </div>
-    <div>
-      <form action="profile.php" method="post" enctype="multipart/form-data">
-      <input type="text" name="category" id="category" placeholder="Topic"><button name="btnPost" type="submit">Post</button>
-      <textarea name="caption" rows="5" cols="50" placeholder="What's on your mind?"></textarea>
-      <input type="file" name="file" id="file">
-      </form>
-            <!-- PHP -->
-      <?php
-      if(isset($_POST['btnPost'])){
-          $category=$_POST['category'];
-          $caption = $_POST['caption'];
-          $userid=$_SESSION['iduser'];
-          $newpost= new Post($datab,$userid,$caption,$category);
-      }                
-      ?>
-
-      </div>
-        <div>
-          <h1>Works</h1>
-            <!-- PHP -->
+    
+    
+      <div class="col-md-12">
+        <div class="counts"> 
+          <!-- Ovde idu samo count funkcije -->
+          <p>Posts</p>
+          <p>Followers</p>
+          <p>Following</p>
+        </div>
+        <div class="adding">
+          <form action="profile.php" method="post" enctype="multipart/form-data">
+          <input type="text" name="category" id="category" placeholder="Topic"><button name="btnPost" type="submit">Post</button>
+          <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?"></textarea>
+          <input type="file" name="file" id="file">
+          </form>
+                <!-- PHP -->
           <?php
-              $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
-              foreach($arr_posts as $el){
-                post::getpost($el,$datab);
-              }
+          if(isset($_POST['btnPost'])){
+              $category=$_POST['category'];
+              $caption = $_POST['caption'];
+              $userid=$_SESSION['iduser'];
+              $newpost= new Post($datab,$userid,$caption,$category);
+          }                
           ?>
 
         </div>
+        <div class = "works">
+
+            <h1>Works</h1>
+            <!-- PHP -->
+            <?php
+            $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
+            foreach($arr_posts as $el){
+            post::getpost($el,$datab);
+            }
+            ?>
+
+        </div>
       </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
