@@ -36,27 +36,70 @@
 
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="profile-pic">
-            <img src="https://via.placeholder.com/150" alt="Profile Picture">
+      <div class = "header">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="profile-pic">
+              <img src="https://via.placeholder.com/150" alt="Profile Picture">
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="profile-info">
+              <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
+              <ul class="list-unstyled">
+                <li><strong>Email:</strong><?php echo " {$user->getEmail()}";?></li>
+                <!-- ovde eventualno mogu da idu followers, following, broj postova -->
+              </ul>
+              <p>
+              <!-- PHP -->
+              <?php
+                echo "<label class='lblProfile'>Nickname:</label> {$user->getNickname()}<br>
+                <label class='lblProfile'>Info:</label> {$user->getInfo()}<br>
+                <button  type='button' class='btn btn-secondary' id='btnEdit' name='btnEdit'>Change data</a>"; //ovde ajax da se uradi za izmenu podataka o korisniku
+              ?>
+
+              </p>
+            </div>
           </div>
         </div>
-        <div class="col-md-8">
-          <div class="profile-info">
-            <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
-            <ul class="list-unstyled">
-              <li><strong>Email:</strong><?php echo " {$user->getEmail()}";?></li>
-              <!-- ovde eventualno mogu da idu followers, following, broj postova -->
-            </ul>
-            <p>
+      </div>
+    
+    
+      <div class="col-md-12">
+        <div class="counts"> 
+          <!-- Ovde idu samo count funkcije -->
+          <p>Posts</p>
+          <p>Followers</p>
+          <p>Following</p>
+        </div>
+        <div class="adding">
+          <form action="profile.php" method="post" enctype="multipart/form-data">
+          <input type="text" name="category" id="category" placeholder="Topic"><button name="btnPost" type="submit">Post</button>
+          <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?"></textarea>
+          <input type="file" name="file" id="file">
+          </form>
+                <!-- PHP -->
+          <?php
+          if(isset($_POST['btnPost'])){
+              $category=$_POST['category'];
+              $caption = $_POST['caption'];
+              $userid=$_SESSION['iduser'];
+              $newpost= new Post($datab,$userid,$caption,$category);
+          }                
+          ?>
+
+        </div>
+        <div class = "works">
+
+            <h1>Works</h1>
+            <!-- PHP -->
             <?php
-              echo "<label class='lblProfile'>Nickname:</label> {$user->getNickname()}<br>
-              <label class='lblProfile'>Info:</label> {$user->getInfo()}<br>
-              <button id='setupprofile' name='setuppprofile'>Change data</a>"; //ovde ajax da se uradi za izmenu podataka o korisniku
+            $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
+            foreach($arr_posts as $el){
+            post::getpost($el,$datab);
+            }
             ?>
-            </p>
-          </div>
+
         </div>
       </div>
     </div>
