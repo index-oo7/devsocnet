@@ -46,6 +46,10 @@ class User{
         
         $querry="SELECT user_name, user_surname, user_nickname, user_email, user_info, user_password FROM app_user WHERE user_id = {$this->id}";
         $res=mysqli_query($this->db,$querry);
+        if(mysqli_error($this->db)){
+            header('Location: ../Login/login.php');
+
+        }
         if(mysqli_num_rows($res)==0){
             echo "eror sa upitom nema ga u bazi"; 
         }else
@@ -197,8 +201,66 @@ class Post{
     //     return $htmlanswer;
       
     }
-
 }
+// }
+// class comment{
+// public $user_id;
+// public $post_id;
+// public $comm_text;
+// public $comm_time;
+// public $dbc;
 
+// public __construct($datab,$userid,$postid,$txt){
+//     $this->dbc=$datab->connect();
+//     $this->$user_id=$userid;
+//     $this->$post_id=$postid;
+//     $this->comm_text=$txt;
+//     $this->loadtodatabase();
+// }
+// function loadtodatabase(){
+//     $querry=$this->dbc->prepare("CALL addcomm(?,?,?)");
+//     $querry=bind_param("iis",$this->user_id,$this->post_id,$this->comm_text);
+//     $querry->execute();
+//     $dbc->close();
+// }
+
+
+// }
+    class Comment{
+        public $userid;
+        public $postid;
+        public $text;
+        public $dbc;
+        
+        function __construct($db,$userid,$postid,$text){
+            $this->dbc=$db->connect();
+            $this->postid=$postid;
+            $this->text=$text;
+            $this->userid=$userid;
+            $this->loadtodb();
+        }
+        function loadtodb(){
+            $query=$this->dbc->prepare("CALL addcomm(?,?,?)");
+            $query->bind_param("iis",$this->userid,$this->postid,$this->text);
+            $query->execute();
+            $this->dbc->close();
+        }
+        function showcomm(){
+            $database= new Database();
+            $dbc=$database->connect();
+            $query=$dbc->prepare("CALL showcomm(?,?)");
+            $query->bind_param("ii",$this->userid,$this->postid);
+            $query->execute();
+            $resp="";
+            $result = $query->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $resp=$row['comment_text']." ".$row['created_datetime'];
+            
+            }
+            return $resp;
+            $dbc->close();
+        }
+
+    }
 
 ?>

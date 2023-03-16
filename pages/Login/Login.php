@@ -47,7 +47,7 @@
         if(mysqli_num_rows($rez)==0){
             echo "Account does not exist. Please SignUp <b><a href='../SignUp/SignUp.php'>here</a></b>";
         }else{
-            $_SESSION['loggedin']=true;
+            $_SESSION['lastlogin']=time();
             $row=mysqli_fetch_array($rez,MYSQLI_ASSOC);
             $_SESSION['iduser']=$row['user_id']; //stavio sam u query da proveri da li postoji lik i da uzmem id toga da bi na landing page uspeo da ga prosledim kao id i po njemu da prikazujem podatke i bice globalan
             echo gettype($_SESSION['iduser']);

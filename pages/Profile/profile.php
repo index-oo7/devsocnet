@@ -1,23 +1,38 @@
 <?php
+
     session_start();
+    $sessionTimeout=2700;//45 min
+    if(isset($_SESSION['lastlogin'])&&(time()-$_SESSION['lastlogin']>$sessionTimeout)){
+      session_unset();
+      session_destroy();
+      header('Location: ../Login/login.php');
+      exit();
+    }else{
     include("../../models/classes.php");
-    
     $datab= new Database();
     $user=new User($datab,$_SESSION['iduser']);
+    $_SESSION['lastlogin']=time();
+  }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
     <title>Profile</title>
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-  </head>
+    
+   
+    
+    </head>
 
   <body>
     <div class="container">
@@ -46,9 +61,10 @@
       </div>
     </div>
     <div>
+    <br>
       <form action="profile.php" method="post" enctype="multipart/form-data">
-      <input type="text" name="category" id="category" placeholder="Topic"><button name="btnPost" type="submit">Post</button>
-      <textarea name="caption" rows="5" cols="50" placeholder="What's on your mind?"></textarea>
+      <input type="text" name="category" id="category" placeholder="Topic"><button name="btnPost" type="submit">Post</button><br>
+      <textarea name="caption" rows="5" cols="50" placeholder="What's on your mind?"></textarea><br>  
       <input type="file" name="file" id="file">
       </form>
 
@@ -70,8 +86,13 @@
 
               foreach($arr_posts as $el){
                 post::getpost($el,$datab);
-              }
+                //$el je id posta
+                echo"<div id='commented'></div>";
+                echo"<input type='text' name='commtxt' id='commtxt' placeholder='Comment'><button id='btncomm' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button>";//ovo this nece da mi prosledi element da bih ga u js uhvatio
 
+                
+              }
+              
           ?>
         </div>
       </div>
@@ -80,5 +101,8 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="../../scripts/jquery.js"></script>
+    <script src="../../scripts/ajaxcalls.js"></script>
   </body>
 </html>
