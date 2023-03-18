@@ -72,6 +72,8 @@
           <p>Followers</p>
           <p>Following</p>
         </div>
+
+
         <div class="adding">
           <form action="profile.php" method="post" enctype="multipart/form-data">
           <input type="text" name="category" id="category" placeholder="Topic"><button name="btnPost" type="submit">Post</button>
@@ -90,55 +92,21 @@
 
         </div>
         <div class = "works">
-
-            <h1>Works</h1>
-            <!-- PHP -->
-            <?php
+          <h1>Works</h1>
+          <!-- PHP -->
+          <?php
             $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
             foreach($arr_posts as $el){
-            post::getpost($el,$datab);
-            }
-            ?>
-
-        </div>
-      </div>
-    </div>
-    <div>
-    <br>
-      <form action="profile.php" method="post" enctype="multipart/form-data">
-      <input type="text" name="category" id="category" placeholder="Topic"><button name="btnPost" type="submit">Post</button><br>
-      <textarea name="caption" rows="5" cols="50" placeholder="What's on your mind?"></textarea><br>  
-      <input type="file" name="file" id="file">
-      </form>
-
-      <?php
-      if(isset($_POST['btnPost'])){
-          $category=$_POST['category'];
-          $caption = $_POST['caption'];
-          $userid=$_SESSION['iduser'];
-          $newpost= new Post($datab,$userid,$caption,$category);
-      }                
-      ?>
-
-      </div>
-        <div>
-          <h1>Works</h1>
-          <?php
-              
-              $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
-
-              foreach($arr_posts as $el){
-                post::getpost($el,$datab);
-                //$el je id posta
-                echo"<div id='commented'></div>";
-                echo"<input type='text' name='commtxt' id='commtxt' placeholder='Comment'><button id='btncomm' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button>";//ovo this nece da mi prosledi element da bih ga u js uhvatio
-
-                
+              post::getpost($el,$datab);
+              //$el je id posta
+              echo"<div id='commented'></div>";
+              echo"<input type='text' name='commtxt' id='commtxt' placeholder='Comment'><button id='btncomm' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button>";//ovo this nece da mi prosledi element da bih ga u js uhvatio 
               }
-              
           ?>
         </div>
       </div>
+    </div>
+    
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

@@ -1,84 +1,111 @@
 :root{
-   --header: #61b1de;
-   --highlight: #fbfdef;
-   --main: #ccbff9;
-   --text: #3c404a;
+  --header: #2a4365;
+  --highlight: #2a4365;
+  --main: #2a4365;
+  --text: #a7b7d9;
 }
-
+body{
+  background-color: rgb(218, 233, 251);
+}
 .container{
   color: var(--text);
 }
 
 .profile-pic img {
-    border-radius: 50%;
-    margin: 20px;
-    margin-left: 150px;
-    margin-top: 40px;
+  border-radius: 50%;
+  margin: 20px;
+  margin-left: 150px;
+  margin-top: 40px;
   }
 .profile-info{
-    padding: 30px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+  padding: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
   }
 
 .profile-info h1 {
-    margin-top: 0;
+  margin-top: 0;
   }
   
 .profile-info h2 {
-    font-weight: normal;
-    margin-top: 10px;
+  font-weight: normal;
+  margin-top: 10px;
   }
   
 .profile-info p {
-    margin-bottom: 0;
+  margin-bottom: 0;
   }
   
 .profile-info ul li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
   }
   
 .profile-info ul li strong {
-    margin-right: 5px;
+  margin-right: 5px;
   }
   
 .lblProfile{
-    font-weight: bolder;
+  font-weight: bolder;
   }
 
 #btnEdit{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
-    border-radius: 15px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+  border-radius: 15px;
   }
 
 .header{
-    background-color: var(--header);
-    border-radius: 30px;
+  margin-top: 7px;
+  height: 33.33%;
+  background-color: var(--header);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  animation: slideup 1s ease-out;
   }
 
 .counts{
-    background-color: var(--highlight);
-    display: flex;
-    border-radius: 30px;
+  margin-top: 7px;
+  height: 33.33%;
+  background-color: var(--highlight);
+  display: flex;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: slideup 1s ease-out;
   }
 
 .counts p{
-    flex: 1;
-    margin: 0 10px;
+  flex: 1;
+  margin: 0 10px;
   }
 
 .adding{
-    background-color: var(--highlight);
-    border-radius: 30px;
-    
+  margin-top: 7px;
+  height: 33.33%;
+  background-color: var(--highlight);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  animation: slideup 1s ease-out;
   }
 
 .works{
-    background-color: var(--main);
-    border-radius: 30px;
-    padding: 30px
+  margin-top: 7px;
+  height: 33.33%;
+  background-color: var(--main);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  animation: slideup 1s ease-out;
   }
 
 
 
 
+/* SlideUp animacija */
+  @keyframes slideup {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 
+  /* OSTAO RESPONZIV */
