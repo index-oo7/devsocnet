@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <title>SignUp</title>
 </head>
 <body>
@@ -21,32 +22,29 @@
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required>
           <button type="submit" name="btnSubmit">Sign Up</button>
+          <br><br>
+          <div class="warning"><p>Already have an account?  <b><a href='../Login/Login.php'>Log in</a></b><br></p></div>
         </form>
       </div>
             <!--AUTOGENERATING USERNAME  -->
       <?php
-        if(isset($_POST['firstName'])and isset($_POST['lastName']) and isset($_POST['email']) and isset($_POST['password'])){
+        if(isset($_POST['btnSubmit'])){
+            if($_POST['firstName']!="" and $_POST['lastName']!="" and $_POST['email']!="" and $_POST['password']!=""){
 
-            $firstName=$_POST['firstName'];
-            $lastName=$_POST['lastName'];
-            $email=$_POST['email'];
-            $password=$_POST['password'];
+                $firstName=$_POST['firstName'];
+                $lastName=$_POST['lastName'];
+                $email=$_POST['email'];
+                $password=$_POST['password'];
 
-            $db= mysqli_connect("localhost","root","","project_database"); 
-            mysqli_query($db,"SET NAMES utf8");
-            
-            $upit="INSERT INTO app_user (user_name,user_surname,user_email,user_password) values ('$firstName','$lastName','$email','$password')";
-            $rez=mysqli_query($db,$upit);
-            if($rez!=NULL){
-                echo "Already have an account? Log in <b><a href='../Login/Login.php'>Log in</a></b> <br>";
+                $db= mysqli_connect("localhost","root","","project_database"); 
+                mysqli_query($db,"SET NAMES utf8");
+                
+                $upit="INSERT INTO app_user (user_name,user_surname,user_email,user_password) values ('$firstName','$lastName','$email','$password')";
+                $rez=mysqli_query($db,$upit);
                 mysqli_close($db);
-            }else{
-                echo "Error ";
             }
-        }else {
-
-            echo "All input fields are required!";
         }
+        
     ?>
 </body>
 </html>

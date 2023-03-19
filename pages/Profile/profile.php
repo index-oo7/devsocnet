@@ -19,9 +19,9 @@
 <html lang="en">
   <head>
     
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
     <title>Profile</title>
     
@@ -40,7 +40,8 @@
         <div class="row">
           <div class="col-md-4">
             <div class="profile-pic">
-              <img src="https://via.placeholder.com/150" alt="Profile Picture">
+              <!-- src treba da bude lokacija do slike koju je postavio korisnik -->
+              <img src="" alt="Profile Picture">
             </div>
           </div>
           <div class="col-md-8">
@@ -55,7 +56,8 @@
               <?php
                 echo "<label class='lblProfile'>Nickname:</label> {$user->getNickname()}<br>
                 <label class='lblProfile'>Info:</label> {$user->getInfo()}<br>
-                <button  type='button' class='btn btn-secondary' id='btnEdit' name='btnEdit'>Change data</a>"; //ovde ajax da se uradi za izmenu podataka o korisniku
+                <button  type='button' class='btn btn-secondary' id='btnEdit' name='btnEdit'>Edit profile</a>
+                <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow'>Follow</a>"; //ovde ajax da se uradi za izmenu podataka o korisniku
               ?>
 
               </p>
@@ -75,10 +77,12 @@
 
 
         <div class="adding">
-          <form action="profile.php" method="post" enctype="multipart/form-data">
-          <input type="text" name="category" id="category" placeholder="Topic"><button name="btnPost" type="submit">Post</button>
-          <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?"></textarea>
-          <input type="file" name="file" id="file">
+          <form action="profile.php" method="post" enctype="multipart/form-data"><br>
+          <input type="text" name="category" id="category" placeholder="Topic"><br>
+          <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?"></textarea><br>
+          <input type="file" name="file" id="file" value="Choose file"> <br>
+          <!-- zameniti input dugme regularnim dugmetom i resiti upload u backendu -->
+          <button name="btnPost" type="submit">Post</button>
           </form>
                 <!-- PHP -->
           <?php
@@ -92,15 +96,16 @@
 
         </div>
         <div class = "works">
-          <h1>Works</h1>
+          <h1 class="col-md-4">Works</h1>
+          <br><br>
           <!-- PHP -->
           <?php
             $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
             foreach($arr_posts as $el){
               post::getpost($el,$datab);
               //$el je id posta
-              echo"<div id='commented'></div>";
-              echo"<input type='text' name='commtxt' id='commtxt' placeholder='Comment'><button id='btncomm' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button>";//ovo this nece da mi prosledi element da bih ga u js uhvatio 
+              echo"<input type='text' name='commtxt' id='commtxt' placeholder='Comment'><br><button id='btncomm' type='submit' class='btn btn-outline-light btn-sm' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button>
+              <hr>";//ovo this nece da mi prosledi element da bih ga u js uhvatio 
               }
           ?>
         </div>

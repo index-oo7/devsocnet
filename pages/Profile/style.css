@@ -3,9 +3,15 @@
   --highlight: #2a4365;
   --main: #2a4365;
   --text: #a7b7d9;
+  --section: #e5e5e5;
 }
 body{
   background-color: rgb(218, 233, 251);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+}
+
+button{
+  border-radius: 15px;
 }
 .container{
   color: var(--text);
@@ -19,7 +25,6 @@ body{
   }
 .profile-info{
   padding: 30px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
   }
 
 .profile-info h1 {
@@ -47,8 +52,7 @@ body{
   font-weight: bolder;
   }
 
-#btnEdit{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+#btnEdit,#btnFollow{
   border-radius: 15px;
   }
 
@@ -79,11 +83,17 @@ body{
 .adding{
   margin-top: 7px;
   height: 33.33%;
+  width: fit-content;
   background-color: var(--highlight);
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
   animation: slideup 1s ease-out;
+  padding: 10px;
+  margin-right: 10px;
   }
+.adding textarea{
+  height: 32px;
+}
 
 .works{
   margin-top: 7px;
@@ -94,10 +104,18 @@ body{
   padding: 30px;
   animation: slideup 1s ease-out;
   }
-
-
-
-
+.works button{
+  margin-top: 5px; 
+}
+.works hr{
+  background-color: white;
+}
+.works h1{
+  color: var(--section);
+  border-radius: 15px;
+  background-color: #1b2c42;
+  height: 50px;
+}
 /* SlideUp animacija */
   @keyframes slideup {
     from {

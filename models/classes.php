@@ -138,6 +138,9 @@ class User{
     }
 
 }
+
+
+
 class Post{
     public $dbc;
     public $userid;
@@ -178,7 +181,7 @@ class Post{
        $txt=$row['caption'];
        $htmlanswer="";
         $htmlanswer.="<div>
-        <h3>{$topic}</h3><br>
+        <h5>{$topic}</h5>
         {$txt}<br>
         {$time};
         </div>";
