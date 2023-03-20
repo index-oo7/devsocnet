@@ -8,12 +8,10 @@ $postid=$_POST['postid'];
 if($txt!=""){
     $comment= new Comment($db,$userid,$postid,$txt);
     $response = $comment->showcomm();
-   
+
 }
 
 echo $response;
 }
-
-
 
 ?>

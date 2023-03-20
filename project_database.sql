@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2023 at 01:43 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Generation Time: Mar 20, 2023 at 02:12 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,36 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_database`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addcomm` (IN `userid` INT, IN `postid` INT, IN `txt` TEXT)   BEGIN
+  INSERT INTO users_comment (user_id, post_id,comment_text)
+  VALUES (userid,postid,txt);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addpost` (IN `p_userid` INT, IN `p_caption` VARCHAR(255), IN `p_category` VARCHAR(255))   BEGIN
+  INSERT INTO post (user_id, caption, category)
+  VALUES (p_userid, p_caption, p_category);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getpost` (IN `id` INT)   BEGIN
+    SELECT * FROM post WHERE post_id = id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `posts_procedure` (`userid` INT)   begin
+select post_id from post where user_id = userid;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showcomm` (IN `p_user_id` INT, IN `p_post_id` INT)   BEGIN
+    SELECT comment_text, created_datetime, user_id
+    FROM users_comment
+    WHERE user_id = p_user_id AND post_id = p_post_id;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -36,6 +66,14 @@ CREATE TABLE `app_user` (
   `user_password` varchar(30) NOT NULL,
   `user_info` tinytext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `app_user`
+--
+
+INSERT INTO `app_user` (`user_id`, `user_name`, `user_surname`, `user_nickname`, `user_email`, `user_password`, `user_info`) VALUES
+(1, 'milos', 'milovanovic', 'mikibog', 'milos@gmail.com', 'idegas', 'ovo je neki info jebemliga'),
+(2, 'Luka', 'Radovanovic', '', 'index007@gmail.com', 'admin', 'ide gas micooooo');
 
 -- --------------------------------------------------------
 
@@ -70,11 +108,48 @@ CREATE TABLE `keyword` (
 CREATE TABLE `post` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `created_datetime` datetime NOT NULL,
+  `created_datetime` datetime NOT NULL DEFAULT current_timestamp(),
   `caption` tinytext DEFAULT NULL,
   `category` varchar(20) DEFAULT NULL,
   `uploaded_file` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`post_id`, `user_id`, `created_datetime`, `caption`, `category`, `uploaded_file`) VALUES
+(2, 1, '2023-03-03 00:07:51', 'Ovo je prvi post koji je id usera 1', 'isprobavanje', ''),
+(3, 2, '2023-03-03 00:09:13', 'ovo je drugi post koji treba da se vidi na time line\r\n', 'isprobavanje', ''),
+(4, 2, '2023-03-03 00:09:32', 'ovo je drugi post koji treba da se vidi na time line\r\n', 'isprobavanje', ''),
+(6, 1, '2023-03-03 00:11:11', 'drugi post kod milosa na profilu', 'isprobavanje', ''),
+(7, 1, '2023-03-05 00:59:03', 'ovo je neki caption', 'testiranje', ''),
+(8, 1, '2023-03-05 01:23:08', 'ovo je neki222 caption', 'testiranje', ''),
+(9, 1, '2023-03-05 01:31:49', 'aaaaaaaaaaaaa', 'testiranje', ''),
+(10, 1, '2023-03-05 01:54:59', 'aaaaaaaaaaaaaaa', 'ako ovo ne radi onda', ''),
+(11, 1, '2023-03-05 01:56:13', 'aaaaaaaaaaaaaaa', 'ako ovo ne radi onda', ''),
+(12, 1, '2023-03-05 01:58:21', 'aaaaaaaaaaaaaaa', 'ako ovo ne radi onda', ''),
+(13, 1, '2023-03-09 00:24:36', 'ovo je pokazivanje da radi sve kako treba ', 'pokazivanje', ''),
+(14, 1, '2023-03-09 00:24:39', 'ovo je pokazivanje da radi sve kako treba ', 'pokazivanje', ''),
+(15, 1, '2023-03-09 00:25:34', 'kjgjgjl', 'vvzxc', ''),
+(16, 1, '2023-03-10 16:47:34', 'kjgjgjl', 'vvzxc', ''),
+(17, 1, '2023-03-10 16:47:59', 'kjgjgjl', 'vvzxc', ''),
+(18, 1, '2023-03-10 16:49:51', 'kjgjgjl', 'vvzxc', ''),
+(19, 1, '2023-03-10 16:50:21', 'kjgjgjl', 'vvzxc', ''),
+(20, 2, '2023-03-10 16:58:16', 'Isporbavanje da li radi sve kako treba sa lukinog profila', 'testiranje', ''),
+(21, 2, '2023-03-10 16:59:09', 'testiranje dodavanje i prikaz posta lukin profil ', 'testiranje', ''),
+(22, 2, '2023-03-10 17:54:06', 'ae mile oplodime', 'ide mile', ''),
+(23, 1, '2023-03-11 18:56:32', 'poslednji post', 'testiranje', ''),
+(24, 1, '2023-03-11 19:05:22', 'ovo je slika ', 'slika', ''),
+(25, 1, '2023-03-13 14:03:53', 'aseaeeaea', 'fdadfa', ''),
+(26, 1, '2023-03-13 14:04:47', 'aseaeeaea', 'fdadfa', ''),
+(27, 1, '2023-03-13 14:05:14', 'aseaeeaea', 'fdadfa', ''),
+(28, 1, '2023-03-13 14:05:28', '', '', ''),
+(29, 1, '2023-03-13 14:14:41', '', '', ''),
+(30, 1, '2023-03-13 14:14:56', '', 'jel radio ovo ', ''),
+(31, 1, '2023-03-13 14:16:35', '', 'ada', ''),
+(32, 1, '2023-03-13 14:17:20', 'sdads', 'sjdfaskfj;asdf', ''),
+(33, 1, '2023-03-14 16:30:14', '2', 'ae pls', '');
 
 -- --------------------------------------------------------
 
@@ -98,8 +173,38 @@ CREATE TABLE `users_comment` (
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
   `comment_text` tinytext NOT NULL,
-  `created_datetime` datetime NOT NULL
+  `created_datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users_comment`
+--
+
+INSERT INTO `users_comment` (`comment_id`, `user_id`, `post_id`, `comment_text`, `created_datetime`) VALUES
+(45, 1, 2, 'ovo je moj koment', '2023-03-16 16:59:59'),
+(46, 1, 2, 'ovo je moj koment', '2023-03-16 16:59:59'),
+(47, 1, 2, 'aaaaaaaaaaaaaaaa', '2023-03-16 17:01:04'),
+(48, 1, 2, 'aaaaaaaaaaaaaaaa', '2023-03-16 17:01:06'),
+(49, 1, 2, 'aaaaaaaaaaaaaaaa', '2023-03-16 17:02:34'),
+(50, 1, 2, 'aaaa', '2023-03-16 17:02:38'),
+(51, 1, 2, 'kkokokook', '2023-03-19 17:21:06'),
+(52, 1, 6, 'kkokokook', '2023-03-19 17:21:13'),
+(53, 1, 6, 'kkokokook', '2023-03-19 17:21:13'),
+(54, 1, 6, 'kkokokook', '2023-03-19 17:21:14'),
+(55, 1, 6, 'kkokokook', '2023-03-19 17:21:14'),
+(56, 1, 2, 'jhjhjj', '2023-03-19 17:27:08'),
+(57, 1, 2, 'jhjhjj', '2023-03-19 17:27:08'),
+(58, 1, 2, 'aaaaaaa', '2023-03-19 17:44:23'),
+(59, 1, 6, 'aaaaaaa', '2023-03-19 17:44:42'),
+(60, 1, 7, 'aaaaaaa', '2023-03-19 17:45:01'),
+(61, 1, 8, 'aaaaaaa', '2023-03-19 17:45:03'),
+(62, 1, 9, 'aaaaaaa', '2023-03-19 17:45:04'),
+(63, 1, 9, 'aaaaaaa', '2023-03-19 17:45:07'),
+(64, 1, 9, 'aaaaaaa', '2023-03-19 17:45:10'),
+(65, 1, 9, 'aaaaa', '2023-03-19 17:47:48'),
+(66, 1, 8, 'dsdsdsd', '2023-03-19 17:47:50'),
+(67, 1, 10, 'ghvhghjghjgjhg', '2023-03-19 17:47:59'),
+(68, 1, 2, 'ide gas ja sambog', '2023-03-19 17:49:15');
 
 --
 -- Indexes for dumped tables
@@ -115,35 +220,36 @@ ALTER TABLE `app_user`
 -- Indexes for table `follower`
 --
 ALTER TABLE `follower`
-  ADD PRIMARY KEY (`following_user_id`,`followed_user_id`),
-  ADD KEY `follower_ibfk_2` (`followed_user_id`);
+  ADD KEY `following_user_id` (`following_user_id`),
+  ADD KEY `followed_user_id` (`followed_user_id`);
 
 --
 -- Indexes for table `keyword`
 --
 ALTER TABLE `keyword`
-  ADD PRIMARY KEY (`keyword_id`,`post_id`),
+  ADD PRIMARY KEY (`keyword_id`),
   ADD KEY `keyword_ibfk_1` (`post_id`);
 
 --
 -- Indexes for table `post`
 --
 ALTER TABLE `post`
-  ADD PRIMARY KEY (`post_id`,`user_id`),
-  ADD KEY `post_ibfk_1` (`user_id`);
+  ADD PRIMARY KEY (`post_id`),
+  ADD KEY `post_ibfk_1` (`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `reaction`
 --
 ALTER TABLE `reaction`
-  ADD PRIMARY KEY (`user_id`,`post_id`),
-  ADD KEY `reaction_ibfk_2` (`post_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indexes for table `users_comment`
 --
 ALTER TABLE `users_comment`
-  ADD PRIMARY KEY (`comment_id`,`user_id`,`post_id`),
+  ADD PRIMARY KEY (`comment_id`),
   ADD KEY `users_comment_ibfk_1` (`user_id`),
   ADD KEY `users_comment_ibfk_2` (`post_id`);
 
@@ -155,7 +261,7 @@ ALTER TABLE `users_comment`
 -- AUTO_INCREMENT for table `app_user`
 --
 ALTER TABLE `app_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `keyword`
@@ -167,13 +273,13 @@ ALTER TABLE `keyword`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users_comment`
 --
 ALTER TABLE `users_comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Constraints for dumped tables

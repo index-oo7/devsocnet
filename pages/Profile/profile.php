@@ -29,10 +29,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    
-   
-    
-    </head>
+
+  </head>
 
   <body>
     <div class="container">
@@ -59,7 +57,6 @@
                 <button  type='button' class='btn btn-secondary' id='btnEdit' name='btnEdit'>Edit profile</a>
                 <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow'>Follow</a>"; //ovde ajax da se uradi za izmenu podataka o korisniku
               ?>
-
               </p>
             </div>
           </div>
@@ -103,9 +100,10 @@
             $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
             foreach($arr_posts as $el){
               post::getpost($el,$datab);
-              //$el je id posta
-              echo"<input type='text' name='commtxt' id='commtxt' placeholder='Comment'><br><button id='btncomm' type='submit' class='btn btn-outline-light btn-sm' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button>
-              <hr>";//ovo this nece da mi prosledi element da bih ga u js uhvatio 
+              echo "<div id='commented{$el}'></div>";
+              echo "<input type='text' name='commtxt{$el}' id='commtxt{$el}' placeholder='Comment'><br>
+              <button id='btncomm' class='btn btn-outline-light' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button><hr>";
+              //ovo this nece da mi prosledi element da bih ga u js uhvatio
               }
           ?>
         </div>
