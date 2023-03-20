@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-5RRvhvuGzCZMN0VPPtyz6yrFjM7pg5jm5bQDe7x/jxvf9Xj5H0ZFlhRo3q8u/KwzQV7Rmy6B1U6fAKGwuW9X4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
   </head>
 
@@ -59,6 +62,9 @@
               ?>
               </p>
             </div>
+            <div class="post">
+              <button id="btnPost" name="btnPost"><i class="fa-light fa-file-plus"></i></button>
+            </div>
           </div>
         </div>
       </div>
@@ -74,13 +80,13 @@
 
 
         <div class="adding">
-          <form action="profile.php" method="post" enctype="multipart/form-data"><br>
+          <!-- <form action="profile.php" method="post" enctype="multipart/form-data"><br>
           <input type="text" name="category" id="category" placeholder="Topic"><br>
           <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?"></textarea><br>
           <input type="file" name="file" id="file" value="Choose file"> <br>
-          <!-- zameniti input dugme regularnim dugmetom i resiti upload u backendu -->
+          //zameniti input dugme regularnim dugmetom i resiti upload u backendu//
           <button name="btnPost" type="submit">Post</button>
-          </form>
+          </form> -->
                 <!-- PHP -->
           <?php
           if(isset($_POST['btnPost'])){
@@ -116,6 +122,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    
     <script src="../../scripts/jquery.js"></script>
     <script src="../../scripts/ajaxcalls.js"></script>
   </body>
