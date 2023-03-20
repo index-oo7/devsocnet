@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="login.php" method="post">
+        <form action="login.php" method="post" class="form">
           <h1>Log In</h1>
 
           <label for="email">Email:</label>
@@ -37,15 +37,20 @@
         $password=$_POST['password'];
 
         if($email == "" || $password == ""){
-            echo "All input fields are required!!!";
+            echo "<script>
+            let warning = document.querySelector('.form');
+            warning.innerHTML += `<br><br><div class='warning'><p>All input fields are required!!!<br></p></div>`;
+            </script>";
         }
-        
 
         $db= mysqli_connect("localhost","root","","project_database");
         $query="SELECT user_id FROM app_user where user_email like ('%{$email}%') and user_password like('%{$password}%')";
         $rez=mysqli_query($db,$query);
         if(mysqli_num_rows($rez)==0){
-            echo "Account does not exist. Please SignUp <b><a href='../SignUp/SignUp.php'>here</a></b>";
+            echo "<script>
+            let warning = document.querySelector('.form');
+            warning.innerHTML += `<br><br><div class='warning'><p>Account does not exist. Please <b><a href='../SignUp/SignUp.php'>SignUp</a></b><br></p></div>`;
+            </script>";
         }else{
             $_SESSION['lastlogin']=time();
             $row=mysqli_fetch_array($rez,MYSQLI_ASSOC);
@@ -58,5 +63,8 @@
     }
     
     ?>
+
+    
+    
 </body>
 </html>
