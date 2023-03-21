@@ -65,23 +65,21 @@ button{
   animation: slideup 1s ease-out;
   }
 .post{
-  height: 33.33%;
+  width: 150px;
+  height: 150px;
 
 }
 
 .counts{
   margin-top: 7px;
-  height: 33.33%;
   background-color: var(--highlight);
   display: flex;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   animation: slideup 1s ease-out;
-  }
-
-.counts p{
-  flex: 1;
-  margin: 0 10px;
+  justify-content: space-evenly;
+  /* ovde moze i space-around ako bude pravilo probleme sa funkcijama kasnije */
+  height: 25px;
   }
 
 .adding{

@@ -1,3 +1,6 @@
+:root{
+  --warning:rgb(158, 67, 67) ;
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -78,7 +81,6 @@
     background-color: #e8e8e8;
     border-radius: 25px;
     padding: 15px;
-    width: auto;
     height: auto;
     width: fit-content;
   }

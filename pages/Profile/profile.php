@@ -30,7 +30,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-5RRvhvuGzCZMN0VPPtyz6yrFjM7pg5jm5bQDe7x/jxvf9Xj5H0ZFlhRo3q8u/KwzQV7Rmy6B1U6fAKGwuW9X4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 
   </head>
@@ -47,7 +47,7 @@
           </div>
           <div class="col-md-8">
             <div class="profile-info">
-              <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
+              <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1><i class="fa-light fa-file-plus"></i>
               <ul class="list-unstyled">
                 <li><strong>Email:</strong><?php echo " {$user->getEmail()}";?></li>
                 <!-- ovde eventualno mogu da idu followers, following, broj postova -->
@@ -63,7 +63,7 @@
               </p>
             </div>
             <div class="post">
-              <button id="btnPost" name="btnPost"><i class="fa-light fa-file-plus"></i></button>
+              <i class="fa-light fa-file-plus"></i>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
               echo "<input type='text' name='commtxt{$el}' id='commtxt{$el}' placeholder='Comment'><br>
               <button id='btncomm' class='btn btn-outline-light' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button><hr>";
               //ovo this nece da mi prosledi element da bih ga u js uhvatio
-              }
+            }
           ?>
         </div>
       </div>
