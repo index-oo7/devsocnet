@@ -47,7 +47,7 @@
           </div>
           <div class="col-md-8">
             <div class="profile-info">
-              <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1><i class="fa-light fa-file-plus"></i>
+              <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
               <ul class="list-unstyled">
                 <li><strong>Email:</strong><?php echo " {$user->getEmail()}";?></li>
                 <!-- ovde eventualno mogu da idu followers, following, broj postova -->
