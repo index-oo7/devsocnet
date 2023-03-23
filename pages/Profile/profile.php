@@ -61,7 +61,7 @@
                 <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow'>Follow</a>"; //ovde ajax da se uradi za izmenu podataka o korisniku
               ?>
               </p>
-            </div>
+              </div>
             <div class="post">
               <i class="fa-light fa-file-plus"></i>
             </div>
@@ -74,8 +74,9 @@
         <div class="counts"> 
           <!-- Ovde idu samo count funkcije -->
           <p>Posts</p>
-          <p>Followers</p>
+          <p>Followers </p>
           <p>Following</p>
+          <!-- Dodati broj pratilaca i broj zapraćenih profila uz pomoć funkcija iz mySQL-a -->
         </div>
 
 
@@ -115,15 +116,34 @@
         </div>
       </div>
     </div>
-    
+
+    <div class="overlay" id="myOverlay">
+      <button id="close">X</button>
+  <div class="popup">
+    <form method="post">
+    <label for="name">Change name:</label>
+  <input type="text" name="name" id="name" value='<?php echo"{$user->getName()}"?>'><br>
+  <label for="surname">Change surname:</label>
+  <input type="text" name="surname" id="surname" value='<?php echo"{$user->getSurname()}"?>'><br>
+  <label for="nickname">Change nick:</label>
+  <input type="text" name="nickname" id="nickname" value='<?php echo"{$user->getNickname()}"?>'><br>
+  <label for="info">Change info:</label>
+  <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br>
+  <button id="btnSubmitChanges" name="btnSubmitChanges">Save changes</button>
+          </form>
+  </div>
+</div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
 
     
     <script src="../../scripts/jquery.js"></script>
     <script src="../../scripts/ajaxcalls.js"></script>
+
+    <script src="script.js"></script>
   </body>
 </html>
