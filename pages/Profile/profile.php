@@ -66,7 +66,7 @@
           </div>
           <div class="col-md-4">
             <div class="post">
-              <button id="btnPost" name="btnPost" class="btnTransparent"><i class="fa-regular fa-folder-open fa-6x"></i></button>
+              <button id="btnPost" name="btnPost" class=""><i class="fa-regular fa-folder-open fa-6x"></i></button>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@
     
     
       <div class="col-md-12">
-        <div class="counts"> 
+        <div id="counts"> 
           <!-- Ovde idu samo count funkcije -->
           <p>Posts</p>
           <p>Followers </p>
@@ -83,14 +83,14 @@
         </div>
 
 
-        <div class="adding">
-          <!-- <form action="profile.php" method="post" enctype="multipart/form-data"><br>
+        <div id="adding">
+          
+          <form action="profile.php" method="post" enctype="multipart/form-data"><br>
           <input type="text" name="category" id="category" placeholder="Topic"><br>
           <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?"></textarea><br>
           <input type="file" name="file" id="file" value="Choose file"> <br>
-          //zameniti input dugme regularnim dugmetom i resiti upload u backendu//
-          <button name="btnPost" type="submit">Post</button>
-          </form> -->
+          <button name="btnAdd" type="submit">Post</button>
+          </form>
                 <!-- PHP -->
           <?php
           if(isset($_POST['btnPost'])){
@@ -102,7 +102,10 @@
           ?>
 
         </div>
-        <div class = "works">
+        <!-- div background ima ulogu u zatamnjivanju ostatka strane dok je forma za objavljivanje posta ukljucena -->
+        <div id="background"></div>
+
+        <div id = "works">
           <h1 class="col-md-4">Works</h1>
           <br><br>
           <!-- PHP -->
@@ -122,20 +125,22 @@
 
     <div class="overlay" id="myOverlay">
       <button id="close">X</button>
-  <div class="popup">
-    <form method="post">
-    <label for="name">Change name:</label>
-  <input type="text" name="name" id="name" value='<?php echo"{$user->getName()}"?>'><br>
-  <label for="surname">Change surname:</label>
-  <input type="text" name="surname" id="surname" value='<?php echo"{$user->getSurname()}"?>'><br>
-  <label for="nickname">Change nick:</label>
-  <input type="text" name="nickname" id="nickname" value='<?php echo"{$user->getNickname()}"?>'><br>
-  <label for="info">Change info:</label>
-  <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br>
-  <button id="btnSubmitChanges" name="btnSubmitChanges">Save changes</button>
-          </form>
-  </div>
-</div>
+
+      <div class="popup">
+        <form method="post">
+        <label for="name">Change name:</label>
+        <input type="text" name="name" id="name" value='<?php echo"{$user->getName()}"?>'><br>
+        <label for="surname">Change surname:</label>
+        <input type="text" name="surname" id="surname" value='<?php echo"{$user->getSurname()}"?>'><br>
+        <label for="nickname">Change nick:</label>
+        <input type="text" name="nickname" id="nickname" value='<?php echo"{$user->getNickname()}"?>'><br>
+        <label for="info">Change info:</label>
+        <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br>
+        <button id="btnSubmitChanges" name="btnSubmitChanges">Save changes</button>
+        </form>
+      </div>
+
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
