@@ -25,13 +25,14 @@
       
     <title>Profile</title>
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="https://use.fontawesome.com/1d73bb3427.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    
 
   </head>
 
@@ -45,7 +46,7 @@
               <img src="" alt="Profile Picture">
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-4">
             <div class="profile-info">
               <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
               <ul class="list-unstyled">
@@ -62,8 +63,10 @@
               ?>
               </p>
               </div>
+          </div>
+          <div class="col-md-4">
             <div class="post">
-              <i class="fa-light fa-file-plus"></i>
+              <button id="btnPost" name="btnPost" class="btnTransparent"><i class="fa-regular fa-folder-open fa-6x"></i></button>
             </div>
           </div>
         </div>

@@ -4,7 +4,9 @@
   --main: #2a4365;
   --text: #a7b7d9;
   --section: #e5e5e5;
+  --text-complement: #D9C9A7;
 }
+
 body{
   background-color: rgb(218, 233, 251);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
@@ -13,6 +15,7 @@ body{
 button{
   border-radius: 15px;
 }
+
 .container{
   color: var(--text);
 }
@@ -23,6 +26,7 @@ button{
   margin-left: 150px;
   margin-top: 40px;
   }
+
 .profile-info{
   padding: 30px;
   }
@@ -64,9 +68,12 @@ button{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
   animation: slideup 1s ease-out;
   }
+
 .post{
-  width: 150px;
-  height: 150px;
+  padding-top: 50px;
+  color: var(--text);
+  width: fit-content;
+  height: fit-content;
 }
 
 .counts{
@@ -92,8 +99,18 @@ button{
   padding: 10px;
   margin-right: 10px;
   }
+  
 .adding textarea{
   height: 32px;
+}
+
+.btnTransparent{
+  background-color: transparent;
+  border: none;
+  color: inherit;
+}
+.btnTransparent:focus{
+  outline: none;
 }
 
 .works{
@@ -105,9 +122,11 @@ button{
   padding: 30px;
   animation: slideup 1s ease-out;
   }
+
 .works button{
   margin-top: 5px; 
 }
+
 .works hr{
   background-color: white;
 }
@@ -117,6 +136,28 @@ button{
   background-color: #1b2c42;
   height: 50px;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 10%;
+  display: none;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  }
+  
+.overlay.show {
+  opacity: 1;
+  display: inline;
+  }
+  
+.popup{
+  color: antiquewhite;
+  }
+
 /* SlideUp animacija */
   @keyframes slideup {
     from {
@@ -127,34 +168,4 @@ button{
     }
   }
 
- 
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 10%;
-    display: none;
-    bottom: 0;
-    z-index: 999;
-    background-color: rgba(0,0,0,0.6);
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-  }
-  
-  .overlay.show {
-    opacity: 1;
-    display: inline;
-  }
-  
-  .popup{
-    color: antiquewhite;
-  }
- 
-  
-  
-  
-  
-
-  
-
-  /* OSTAO RESPONZIV */
+/* OSTAO RESPONZIV */
