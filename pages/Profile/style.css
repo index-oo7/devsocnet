@@ -108,6 +108,10 @@ button{
   margin-right: 10px;
   animation: fade-in 1s forwards;
   }
+
+#adding textarea{
+  height: 32px;
+}
   
 #adding form {
     color: white;
@@ -123,10 +127,6 @@ button{
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 998;
   }
-
-#adding textarea{
-  height: 32px;
-}
 
 .btnTransparent{
   background-color: transparent;
