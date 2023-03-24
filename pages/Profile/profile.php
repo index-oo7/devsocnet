@@ -66,7 +66,7 @@
           </div>
           <div class="col-md-4">
             <div class="post">
-              <button id="btnPost" name="btnPost" class=""><i class="fa-regular fa-folder-open fa-6x"></i></button>
+              <button id="btnPost" name="btnPost" class="btnTransparent"><i class="fa-regular fa-folder-open fa-6x"></i></button>
             </div>
           </div>
         </div>
