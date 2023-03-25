@@ -108,13 +108,13 @@ button{
   margin-right: 10px;
   animation: fade-in 1s forwards;
   }
+  
+#adding form {
+  color: white;
+  }
 
 #adding textarea{
   height: 32px;
-}
-  
-#adding form {
-    color: white;
   }
   
 #background {

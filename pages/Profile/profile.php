@@ -102,7 +102,8 @@
           ?>
 
         </div>
-        <!-- div background ima ulogu u zatamnjivanju ostatka strane dok je forma za objavljivanje posta ukljucena -->
+
+        <!-- Background is shadow shown everytime user invokes popup window -->
         <div id="background"></div>
 
         <div id = "works">
@@ -148,10 +149,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   
 
-    
+    <!-- Files handling ajax communication -->
     <script src="../../scripts/jquery.js"></script>
     <script src="../../scripts/ajaxcalls.js"></script>
 
+    <!-- Script file handling popup windows -->
     <script src="script.js"></script>
   </body>
 </html>
