@@ -125,12 +125,11 @@
         <div id = "works">
           <h1 class="col-md-4">Works</h1>
           <br><br>
-
+          
           <?php
             $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
             foreach($arr_posts as $el){
               post::getpost($el,$datab);
-              echo "<div id='commented{$el}'></div>";
               echo "<input type='text' name='commtxt{$el}' id='commtxt{$el}' placeholder='Comment'><br>
               <button id='btncomm' class='btn btn-outline-light' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button><hr>";
               //ovo this nece da mi prosledi element da bih ga u js uhvatio
@@ -138,8 +137,7 @@
           ?>
         </div>
       </div>
-    </div>
-
+    </div> 
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
