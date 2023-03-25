@@ -26,32 +26,26 @@ button{
   margin-left: 150px;
   margin-top: 40px;
   }
-
 .profile-info{
   padding: 30px;
   }
-
 .profile-info h1 {
   margin-top: 0;
   }
-  
 .profile-info h2 {
   font-weight: normal;
   margin-top: 10px;
   }
-  
 .profile-info p {
   margin-bottom: 0;
   }
-  
 .profile-info ul li {
   margin-bottom: 5px;
-  }
-  
+  } 
 .profile-info ul li strong {
   margin-right: 5px;
   }
-  
+
 .lblProfile{
   font-weight: bolder;
   }
@@ -94,7 +88,6 @@ button{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px;
   background-color: #444444;
   border-radius: 10px;
   z-index: 999;
@@ -108,15 +101,39 @@ button{
   margin-right: 10px;
   animation: fade-in 1s forwards;
   }
-  
 #adding form {
   color: white;
   }
-
 #adding textarea{
   height: 32px;
   }
   
+#editing {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #444444;
+  border-radius: 10px;
+  z-index: 999;
+  margin-top: 7px;
+  height: 33.33%;
+  width: fit-content;
+  background-color: var(--highlight);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  padding: 10px;
+  margin-right: 10px;
+  animation: fade-in 1s forwards;
+  }  
+#editing form {
+  color: white;
+  }
+#editing textarea{
+  height: 32px;
+  }
+
 #background {
   display: none;
   position: fixed;
@@ -125,7 +142,7 @@ button{
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 998;
+  z-index: 900;
   }
 
 .btnTransparent{
@@ -143,11 +160,9 @@ button{
   padding: 30px;
   animation: slideup 1s ease-out;
   }
-
 #works button{
   margin-top: 5px; 
 }
-
 #works hr{
   background-color: white;
 }
@@ -157,27 +172,6 @@ button{
   background-color: #1b2c42;
   height: 50px;
 }
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 10%;
-  display: none;
-  bottom: 0;
-  z-index: 999;
-  background-color: rgba(0,0,0,0.6);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  }
-  
-.overlay.show {
-  opacity: 1;
-  display: inline;
-  }
-  
-.popup{
-  color: antiquewhite;
-  }
 
 /* SlideUp animacija */
   @keyframes slideup {

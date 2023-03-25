@@ -51,9 +51,9 @@
               <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
               <ul class="list-unstyled">
                 <li><strong>Email:</strong><?php echo " {$user->getEmail()}";?></li>
-                <!-- ovde eventualno mogu da idu followers, following, broj postova -->
               </ul>
               <p>
+
               <!-- PHP -->
               <?php
                 echo "<label class='lblProfile'>Nickname:</label> {$user->getNickname()}<br>
@@ -75,11 +75,10 @@
     
       <div class="col-md-12">
         <div id="counts"> 
-          <!-- Ovde idu samo count funkcije -->
           <p>Posts</p>
           <p>Followers </p>
           <p>Following</p>
-          <!-- Dodati broj pratilaca i broj zapraćenih profila uz pomoć funkcija iz mySQL-a -->
+          <!-- Dodati broj pratilaca, broj zapraćenih profila i broj objava uz pomoć funkcija iz mySQL-a -->
         </div>
 
 
@@ -88,8 +87,8 @@
           <form action="profile.php" method="post" enctype="multipart/form-data"><br>
           <input type="text" name="category" id="category" placeholder="Topic"><br>
           <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?"></textarea><br>
-          <input type="file" name="file" id="file" value="Choose file"> <br>
-          <button name="btnAdd" type="submit">Post</button>
+          <input type="file" name="file" id="file" value="Choose file"> <br><br>
+          <button name="btnAdd" type="submit" class='btn btn-outline-light'>Post</button>
           </form>
                 <!-- PHP -->
           <?php
@@ -124,11 +123,8 @@
       </div>
     </div>
 
-    <div class="overlay" id="myOverlay">
-      <button id="close">X</button>
-
-      <div class="popup">
-        <form method="post">
+    <div id="editing">
+      <form method="post">
         <label for="name">Change name:</label>
         <input type="text" name="name" id="name" value='<?php echo"{$user->getName()}"?>'><br>
         <label for="surname">Change surname:</label>
@@ -136,11 +132,9 @@
         <label for="nickname">Change nick:</label>
         <input type="text" name="nickname" id="nickname" value='<?php echo"{$user->getNickname()}"?>'><br>
         <label for="info">Change info:</label>
-        <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br>
-        <button id="btnSubmitChanges" name="btnSubmitChanges">Save changes</button>
-        </form>
-      </div>
-
+        <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br><br>
+        <button id="btnSubmitChanges" name="btnSubmitChanges" class='btn btn-outline-light' >Save changes</button>
+      </form>
     </div>
 
     <!-- Bootstrap JS -->
