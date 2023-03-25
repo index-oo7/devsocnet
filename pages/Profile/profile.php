@@ -54,7 +54,6 @@
               </ul>
               <p>
 
-              <!-- PHP -->
               <?php
                 echo "<label class='lblProfile'>Nickname:</label> {$user->getNickname()}<br>
                 <label class='lblProfile'>Info:</label> {$user->getInfo()}<br>
@@ -81,6 +80,19 @@
           <!-- Dodati broj pratilaca, broj zapraćenih profila i broj objava uz pomoć funkcija iz mySQL-a -->
         </div>
 
+        <div id="editing">
+          <form method="post">
+            <label for="name">Change name:</label>
+            <input type="text" name="name" id="name" value='<?php echo"{$user->getName()}"?>'><br>
+            <label for="surname">Change surname:</label>
+            <input type="text" name="surname" id="surname" value='<?php echo"{$user->getSurname()}"?>'><br>
+            <label for="nickname">Change nick:</label>
+            <input type="text" name="nickname" id="nickname" value='<?php echo"{$user->getNickname()}"?>'><br>
+            <label for="info">Change info:</label>
+            <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br><br>
+            <button id="btnSubmitChanges" name="btnSubmitChanges" class='btn btn-outline-light' >Save changes</button>
+          </form>
+        </div>
 
         <div id="adding">
           
@@ -90,9 +102,9 @@
           <input type="file" name="file" id="file" value="Choose file"> <br><br>
           <button name="btnAdd" type="submit" class='btn btn-outline-light'>Post</button>
           </form>
-                <!-- PHP -->
+                
           <?php
-          if(isset($_POST['btnPost'])){
+          if(isset($_POST['btnAdd'])){
               $category=$_POST['category'];
               $caption = $_POST['caption'];
               $userid=$_SESSION['iduser'];
@@ -108,7 +120,7 @@
         <div id = "works">
           <h1 class="col-md-4">Works</h1>
           <br><br>
-          <!-- PHP -->
+
           <?php
             $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
             foreach($arr_posts as $el){
@@ -123,19 +135,6 @@
       </div>
     </div>
 
-    <div id="editing">
-      <form method="post">
-        <label for="name">Change name:</label>
-        <input type="text" name="name" id="name" value='<?php echo"{$user->getName()}"?>'><br>
-        <label for="surname">Change surname:</label>
-        <input type="text" name="surname" id="surname" value='<?php echo"{$user->getSurname()}"?>'><br>
-        <label for="nickname">Change nick:</label>
-        <input type="text" name="nickname" id="nickname" value='<?php echo"{$user->getNickname()}"?>'><br>
-        <label for="info">Change info:</label>
-        <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br><br>
-        <button id="btnSubmitChanges" name="btnSubmitChanges" class='btn btn-outline-light' >Save changes</button>
-      </form>
-    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
