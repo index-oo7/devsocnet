@@ -24,10 +24,10 @@
 
           <button type="submit" name="btnSubmit">Log In</button>
         </form>
-      </div>
+    </div>
 
       <!-- PHP -->
-      <?php
+    <?php
 
 
        if(isset($_POST['btnSubmit'])){
@@ -57,7 +57,5 @@
     
     ?>
 
-    
-    
 </body>
 </html>

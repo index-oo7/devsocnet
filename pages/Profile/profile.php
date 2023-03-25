@@ -50,7 +50,7 @@
             <div class="profile-info">
               <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
               <ul class="list-unstyled">
-                <li><strong>Email:</strong><?php echo " {$user->getEmail()}";?></li>
+                <li><strong>Email:</strong><?php echo "{$user->getEmail()}";?></li>
               </ul>
               <p>
 
@@ -58,7 +58,8 @@
                 echo "<label class='lblProfile'>Nickname:</label> {$user->getNickname()}<br>
                 <label class='lblProfile'>Info:</label> {$user->getInfo()}<br>
                 <button  type='button' class='btn btn-secondary' id='btnEdit' name='btnEdit'>Edit profile</a>
-                <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow'>Follow</a>"; //ovde ajax da se uradi za izmenu podataka o korisniku
+                <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow'>Follow</a>"; 
+                //ovde ajax da se uradi za izmenu podataka o korisniku
               ?>
               </p>
               </div>
@@ -80,7 +81,8 @@
           <!-- Dodati broj pratilaca, broj zapraćenih profila i broj objava uz pomoć funkcija iz mySQL-a -->
         </div>
 
-        <div id="editing">
+        <div id="editing" class="window">
+
           <form method="post">
             <label for="name">Change name:</label>
             <input type="text" name="name" id="name" value='<?php echo"{$user->getName()}"?>'><br>
@@ -92,23 +94,26 @@
             <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br><br>
             <button id="btnSubmitChanges" name="btnSubmitChanges" class='btn btn-outline-light' >Save changes</button>
           </form>
+
         </div>
 
-        <div id="adding">
+        <div id="adding" class="window">
           
           <form action="profile.php" method="post" enctype="multipart/form-data"><br>
-          <input type="text" name="category" id="category" placeholder="Topic"><br>
-          <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?"></textarea><br>
+          <input type="text" name="category" id="category" placeholder="Topic" required><br>
+          <textarea name="caption" rows="1" cols="50" placeholder="What's on your mind?" required></textarea><br>
           <input type="file" name="file" id="file" value="Choose file"> <br><br>
           <button name="btnAdd" type="submit" class='btn btn-outline-light'>Post</button>
           </form>
                 
           <?php
           if(isset($_POST['btnAdd'])){
+            if($_POST['category']!="" && $_POST['caption']!=""){
               $category=$_POST['category'];
               $caption = $_POST['caption'];
               $userid=$_SESSION['iduser'];
               $newpost= new Post($datab,$userid,$caption,$category);
+            }
           }                
           ?>
 

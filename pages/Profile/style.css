@@ -82,7 +82,7 @@ button{
   height: 25px;
   }
 
-#adding {
+.window{
   display: none;
   position: fixed;
   top: 50%;
@@ -99,34 +99,10 @@ button{
   z-index: 999;
   animation: fade-in 1s forwards;
   }
-#adding form {
+.window form {
   color: white;
   }
-#adding textarea{
-  height: 32px;
-  }
-  
-#editing {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  height: fit-content;
-  width: fit-content;
-  margin-top: 7px;
-  margin-right: 10px;
-  padding: 10px;
-  background-color: var(--highlight);
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
-  transform: translate(-50%, -50%);
-  z-index: 999;
-  animation: fade-in 1s forwards;
-  }  
-#editing form {
-  color: white;
-  }
-#editing textarea{
+.window textarea{
   height: 32px;
   }
 
