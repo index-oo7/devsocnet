@@ -59,7 +59,7 @@
                 <label class='lblProfile'>Info:</label> {$user->getInfo()}<br>
                 <button  type='button' class='btn btn-secondary' id='btnEdit' name='btnEdit'>Edit profile</a>
                 <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow'>Follow</a>"; 
-                //ovde ajax da se uradi za izmenu podataka o korisniku
+                
               ?>
               </p>
               </div>
@@ -92,9 +92,10 @@
             <input type="text" name="nickname" id="nickname" value='<?php echo"{$user->getNickname()}"?>'><br>
             <label for="info">Change info:</label>
             <textarea name="info" id="info" ><?php echo"{$user->getInfo()}"?></textarea><br><br>
-            <button id="btnSubmitChanges" name="btnSubmitChanges" class='btn btn-outline-light' >Save changes</button>
+           <?php echo "<button id='btnSubmitChanges' name='btnSubmitChanges' class='btn btn-outline-light' onclick='ChangeInfo({$_SESSION['iduser']})'>Save changes</button>"?>
+            
           </form>
-
+          <div id="response"></div>
         </div>
 
         <div id="adding" class="window">
@@ -119,6 +120,7 @@
 
         </div>
 
+       
         <!-- Background is shadow shown everytime user invokes popup window -->
         <div id="background"></div>
 
