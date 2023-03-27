@@ -37,6 +37,7 @@ if(isset($_POST['userid']) and isset($_POST['name']) and isset($_POST['surname']
     else{
         $response="Nickname already exists. Please try with another one.";
     }
+    echo $response;
 }    
 }
 
