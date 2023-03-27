@@ -144,6 +144,10 @@ button{
   background-color: #1b2c42;
   height: 50px;
 }
+.date{
+  position: relative;
+  margin-left: 85%;
+}
 
 /* SlideUp animacija */
   @keyframes slideup {

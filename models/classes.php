@@ -42,7 +42,7 @@ class User{
     
     function changeInfo($iduser,$name,$surname,$nickname,$info){
         $query="UPDATE app_user SET user_name='{$name}', user_surname='{$surname}', user_nickname='{$nickname}',user_info='{$info}' WHERE user_id={$iduser}";
-        $res=mysqli_query($this->db,$querry);
+        $res=mysqli_query($this->db,$query);
         return "Data changed successfully!";
     }
 
@@ -184,12 +184,13 @@ class Post{
       while( $row=mysqli_fetch_assoc($res)){
         $topic=$row['category'];
        $time=$row['created_datetime'];
+       $date=date('d.m.Y.',strtotime($time));
        $txt=$row['caption'];
        $htmlanswer="";
         $htmlanswer.="<div>
         <h5>{$topic}</h5>
         {$txt}<br>
-        {$time};
+        <div class='date'>{$date}</div>
         </div>";
         echo $htmlanswer;
 
