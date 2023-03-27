@@ -25,7 +25,7 @@ if(isset($_POST['userid']) and isset($_POST['name']) and isset($_POST['surname']
     $surname=$_POST['surname'];
     $nickname=$_POST['nickname'];
     $info=$_POST['info'];
-    $query="SELECT * FROM app_user WHERE user_nickname='{$nickname}'";
+    $query="SELECT * FROM app_user WHERE user_nickname='{$nickname}' and user_id<>'{$iduser}'";
     $res=mysqli_query($db->connect(),$query);
     if(mysqli_num_rows($res)==0){
         // $target_user="SELECT * FROM app_user WHERE user_id={$iduser}";
