@@ -124,6 +124,7 @@ class User{
         $dbc->close();
         return $posts;
     }
+    //napraviti proceduru da mi dohvati ime po id da se prikaze u comm
 }
 
 
@@ -204,6 +205,20 @@ class Comment{
             $resp=$row['comment_text']." ".$row['created_datetime'];
         }
         return $resp;
+        $dbc->close();
+    }
+    static function getcommbypostid($postid){
+        $databse=new Database();
+        $dbc=$database->connect();
+        $query=$dbc->prepare("CALL commentsofpost(?)");
+        $stm->bind_param("i",$postid);
+        $query->execute();
+        $comments=array();
+        $result=$stm->get_result();
+        while($row=$result->fetch_assoc()){
+            array_push($comments,$row);
+        }
+        return $comments;
         $dbc->close();
     }
 }

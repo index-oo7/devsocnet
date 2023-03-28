@@ -8,11 +8,16 @@ function Postcomm(postid,userid){
     if(txt!=""){
         $.post("../../ajax/ajax.php?fun=comment",{commtxt:txt,iduser:userid,postid:postid},function(response){
             $('[id="' + divname + '"]').html(response);
-
         })
     }
 }
+function allcomments(postid){
+    $.post("../../ajax/ajax.php?fun=commentsbypost",{postid:postid},function(){
+        $("#commsec").html(response);
+    })
 
+    
+}
 function ChangeInfo(userid){
     let name=$("#name").val();
     let surname=$("#surname").val();

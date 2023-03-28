@@ -1,13 +1,13 @@
 <?php
 
-    session_start();
-    $sessionTimeout=2700;//45 min
-    if(isset($_SESSION['lastlogin'])&&(time()-$_SESSION['lastlogin']>$sessionTimeout)){
-      session_unset();
-      session_destroy();
-      header('Location: ../Login/login.php');
-      exit();
-    }else{
+  session_start();
+  $sessionTimeout=2700;//45 min
+  if(isset($_SESSION['lastlogin'])&&(time()-$_SESSION['lastlogin']>$sessionTimeout)){
+    session_unset();
+    session_destroy();
+    header('Location: ../Login/login.php');
+    exit();
+  }else{
     include("../../models/classes.php");
     $datab= new Database();
     $user=new User($datab,$_SESSION['iduser']);
@@ -76,8 +76,21 @@
       <div class="col-md-12">
         <div id="counts"> 
           <p>Posts</p>
-          <p>Followers </p>
-          <p>Following</p>
+          <?php
+          // $db=new Database();
+          // $query="SELECT fun_num_of_followers({$SESSION['iduser']})";
+          // $res=mysqli_query($db->connect(),$query);
+          // echo "<p>Followers". $res."</p> ";
+          // mysqli_close($db);
+          // $query1="SELECT fun_num_of_followed({$SESSION['iduser']})";
+         
+          // $res1=mysqli_query($db->connect(),$query1);
+          
+          // echo " <p>Following".$res1."</p>";
+          // mysqli_close($db);
+          ?>
+          
+         
           <!-- Dodati broj pratilaca, broj zapraćenih profila i broj objava uz pomoć funkcija iz mySQL-a -->
         </div>
 
@@ -95,7 +108,7 @@
            <?php echo "<button id='btnSubmitChanges' name='btnSubmitChanges' class='btn btn-outline-light' onclick='ChangeInfo({$_SESSION['iduser']})'>Save changes</button>"?>
             
           </form>
-          <div id="response"></div>
+          <div id="response"></div> 
         </div>
 
         <div id="adding" class="window">
@@ -124,6 +137,9 @@
         <!-- Background is shadow shown everytime user invokes popup window -->
         <div id="background"></div>
 
+        <!-- Inicijalni prikaz komentara -->
+        <div id="commsec">komentariii</div>
+
         <div id = "works">
           <h1 class="col-md-4">Works</h1>
           <br><br>
@@ -132,8 +148,9 @@
             $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
             foreach($arr_posts as $el){
               post::getpost($el,$datab);
-              echo "<input type='text' name='commtxt{$el}' id='commtxt{$el}' placeholder='Comment'><br>
-              <button id='btncomm' class='btn btn-outline-light' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button><hr>";
+              echo"<button id='btncomments' onclick='allcomments({$el})'>Comments</button><hr>";
+              // echo "<input type='text' name='commtxt{$el}' id='commtxt{$el}' placeholder='Comment'><br>
+              // <button id='btncomm' class='btn btn-outline-light' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button>";
               //ovo this nece da mi prosledi element da bih ga u js uhvatio
             }
           ?>
