@@ -15,12 +15,12 @@ if($fun=="comment"){
 }
 if($fun=="commentsbypost"){
     if(isset($_POST['postid'])){
-        $postid=$_POST['postid']);
+        $postid=$_POST['postid'];
         $comments=array();
         $comments=Comment::getcommbypostid($postid);
         $commented="";
         foreach ($comments as $comment) {
-            $commented+="$comment['comment_text']".       ."$comment['created_time']" .    ."$comment['user_id']";
+            $commented.="$comment['comment_text']"."$comment['created_time']"."$comment['user_id']";
         }
         $response=$commented."<input type='text' name='commtxt{$postid}' id='commtxt{$postid}' placeholder='Comment'><br><button id='btncomm' class='btn btn-outline-light' type='submit' onclick='Postcomm({$postid},{$_SESSION['iduser']})'>Comment</button>";
     }
