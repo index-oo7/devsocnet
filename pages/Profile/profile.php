@@ -124,8 +124,17 @@
           if(isset($_POST['btnAdd'])){
             if($_POST['category']!="" && $_POST['caption']!=""){
               $category=$_POST['category'];
-              $caption = $_POST['caption'];
+              $caption = $_POST['caption'] ;
               $userid=$_SESSION['iduser'];
+              if(isset($_FILES['file'])){
+              $uploaded=$_FILES['file']['name'];
+              $targetdir="../../uploads/";
+              $file=$targetdir. basename($uploaded);
+              $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
+              if(move_uploaded_file($_FILES['file']['tmp_name'],$file)){
+                $newpost=new Post($datab,$userid,$caption,$category,$file,$file_ext);
+              }
+            }
               $newpost= new Post($datab,$userid,$caption,$category);
             }
           }                
@@ -138,8 +147,8 @@
         <div id="background"></div>
 
         <!-- Inicijalni prikaz komentara -->
-        <div id="commsec">komentariii</div>
-
+        
+        <div id="commsecc" style="background-color:black">komentariii</div>
         <div id = "works">
           <h1 class="col-md-4">Works</h1>
           <br><br>
@@ -157,7 +166,7 @@
         </div>
       </div>
     </div> 
-
+   
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

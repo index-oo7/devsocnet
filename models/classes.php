@@ -125,6 +125,20 @@ class User{
         return $posts;
     }
     //napraviti proceduru da mi dohvati ime po id da se prikaze u comm
+    static public function getbyid($userid){
+        $resp=array();
+        $db= new Database();
+        $dbc=$db->connect();
+        $query=$dbc->prepare("Call getuserbyid(?)");
+        $query->bind_param("i",$userid);
+        $query->execute();
+        $res=$query->get_result();
+        while($row=mysqli_fetch_assoc($res)){
+            array_push($resp,$row);
+        }
+        return $resp;
+        $dbc->close();
+    }
 }
 
 
@@ -134,20 +148,27 @@ class Post{
     public $datetime;
     public $caption;
     public $category;
-   // public $uploaded_file;
+    public $uploaded_file;
+    public $ext;
     
-    function __construct($datab,$userid,$caption,$category){
+    public function __construct($datab,$userid,$caption,$category,$uploaded_file='',$ext=''){
         $this->dbc=$datab->connect();
         $this->userid=$userid;
         $this->caption=$caption;
         $this->category=$category;
+        $this->uploaded_file=$uploaded_file;
+        $this->ext=$ext;
         $this->loadtodatabase();
     }
+   
+    
+    
 
     function loadtodatabase(){
-        $query = $this->dbc->prepare("CALL addpost(?, ?, ?)");
-        $query->bind_param("iss", $this->userid, $this->caption, $this->category);
+        $query = $this->dbc->prepare("CALL addpost(?, ?, ?, ?, ?)");
+        $query->bind_param("issss", $this->userid, $this->caption, $this->category, $this->uploaded_file,$this->ext);
         $query->execute();
+        $this->dbc->close();
     }
 
     public static function getpost($idpost,$datab){
@@ -161,12 +182,18 @@ class Post{
             $time=$row['created_datetime'];
             $date=date('d.m.Y.',strtotime($time));
             $txt=$row['caption'];
+            $fileurl=$row['uploaded_file'];
             $htmlanswer="";
             $htmlanswer.="<div>
             <h5>{$topic}</h5>
             {$txt}<br>
             <div class='date'>{$date}</div>
-            </div>";
+            </div>
+            <br><p>{$fileurl}</p>
+            ";//ovde sam stao treba da resim ovo oko uploada i unosa u bazu
+            if(!empty($fileurl)){
+                $htmlanswer.="<a target='_blank' href='{$fileurl}' download>Download file</a>";
+            }
             echo $htmlanswer;
         }
         $dbc->close();
@@ -208,13 +235,13 @@ class Comment{
         $dbc->close();
     }
     static function getcommbypostid($postid){
-        $databse=new Database();
+        $database=new Database();
         $dbc=$database->connect();
         $query=$dbc->prepare("CALL commentsofpost(?)");
-        $stm->bind_param("i",$postid);
+        $query->bind_param("i",$postid);
         $query->execute();
         $comments=array();
-        $result=$stm->get_result();
+        $result=$query->get_result();
         while($row=$result->fetch_assoc()){
             array_push($comments,$row);
         }

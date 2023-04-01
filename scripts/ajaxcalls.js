@@ -12,8 +12,8 @@ function Postcomm(postid,userid){
     }
 }
 function allcomments(postid){
-    $.post("../../ajax/ajax.php?fun=commentsbypost",{postid:postid},function(){
-        $("#commsec").html(response);
+    $.post("../../ajax/ajax.php?fun=commentsbypost",{postid:postid},function(response){
+        $("#commsecc").html(response);
     })
 
     
