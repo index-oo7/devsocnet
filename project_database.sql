@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2023 at 11:52 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Generation Time: Apr 02, 2023 at 01:10 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,34 +25,46 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addcomm` (IN `userid` INT, IN `postid` INT, IN `txt` TEXT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addcomm` (IN `userid` INT, IN `postid` INT, IN `txt` TEXT)   BEGIN
   INSERT INTO users_comment (user_id, post_id,comment_text)
   VALUES (userid,postid,txt);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addpost` (IN `p_userid` INT, IN `p_caption` VARCHAR(255), IN `p_category` VARCHAR(255))  BEGIN
-  INSERT INTO post (user_id, caption, category)
-  VALUES (p_userid, p_caption, p_category);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addpost` (IN `p_userid` INT, IN `p_caption` VARCHAR(255), IN `p_category` VARCHAR(255), IN `p_fileurl` VARCHAR(255), IN `p_filetype` VARCHAR(10))   BEGIN
+  INSERT INTO post (user_id, caption, category,uploaded_file,file_ext)
+  VALUES (p_userid, p_caption, p_category,p_fileurl,p_filetype);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getpost` (IN `id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `commentsofpost` (IN `p_post_id` INT)   BEGIN
+    SELECT comment_text, created_datetime, user_id
+    FROM users_comment
+    WHERE post_id = p_post_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getpost` (IN `id` INT)   BEGIN
     SELECT * FROM post WHERE post_id = id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `posts_procedure` (`userid` INT)  begin
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getuserbyid` (IN `userid` INT)   BEGIN
+	SELECT * from app_user
+    WHERE user_id=userid;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `posts_procedure` (`userid` INT)   begin
 select post_id from post where user_id = userid;
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `showcomm` (IN `p_user_id` INT, IN `p_post_id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `showcomm` (IN `p_post_id` INT)   BEGIN
     SELECT comment_text, created_datetime, user_id
     FROM users_comment
-    WHERE user_id = p_user_id AND post_id = p_post_id;
+    WHERE post_id = p_post_id;
 END$$
 
 --
 -- Functions
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `fun_num_of_followed` (`user_id` INT) RETURNS INT(11) begin 
+CREATE DEFINER=`root`@`localhost` FUNCTION `fun_num_of_followed` (`user_id` INT) RETURNS INT(11)  begin 
 declare num_of_followed int;
 select count(followed_user_id) into num_of_followed
 from follower 
@@ -60,7 +72,7 @@ where following_user_id=user_id and following_status=1;
 return num_of_followed;
 END$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `fun_num_of_followers` (`user_id` INT) RETURNS INT(11) begin 
+CREATE DEFINER=`root`@`localhost` FUNCTION `fun_num_of_followers` (`user_id` INT) RETURNS INT(11)  begin 
 declare num_of_followers int;
 select count(following_user_id) into num_of_followers
 from follower 
@@ -91,8 +103,8 @@ CREATE TABLE `app_user` (
 --
 
 INSERT INTO `app_user` (`user_id`, `user_name`, `user_surname`, `user_nickname`, `user_email`, `user_password`, `user_info`) VALUES
-(1, 'milos', 'milovanovic', 'mikibog', 'milos@gmail.com', 'idegas', 'ovo je neki info jebemliga'),
-(2, 'Luka', 'Radovanovic', '', 'index007@gmail.com', 'admin', 'ide gas micooooo');
+(1, 'milos', 'milovanovic', 'BUKSNIC', 'milos@gmail.com', 'idegas', 'Gym rat bog i batina'),
+(2, 'kokok', 'Radovanovic', 'lule', 'index007@gmail.com', 'admin', 'ide gas micooooo');
 
 -- --------------------------------------------------------
 
@@ -139,6 +151,7 @@ CREATE TABLE `post` (
   `caption` tinytext DEFAULT NULL,
   `category` varchar(20) DEFAULT NULL,
   `uploaded_file` mediumtext NOT NULL,
+  `file_ext` varchar(10) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -146,38 +159,14 @@ CREATE TABLE `post` (
 -- Dumping data for table `post`
 --
 
-INSERT INTO `post` (`post_id`, `user_id`, `created_datetime`, `caption`, `category`, `uploaded_file`, `status`) VALUES
-(2, 1, '2023-03-03 00:07:51', 'Ovo je prvi post koji je id usera 1', 'isprobavanje', '', 1),
-(3, 2, '2023-03-03 00:09:13', 'ovo je drugi post koji treba da se vidi na time line\r\n', 'isprobavanje', '', 1),
-(4, 2, '2023-03-03 00:09:32', 'ovo je drugi post koji treba da se vidi na time line\r\n', 'isprobavanje', '', 1),
-(6, 1, '2023-03-03 00:11:11', 'drugi post kod milosa na profilu', 'isprobavanje', '', 1),
-(7, 1, '2023-03-05 00:59:03', 'ovo je neki caption', 'testiranje', '', 1),
-(8, 1, '2023-03-05 01:23:08', 'ovo je neki222 caption', 'testiranje', '', 1),
-(9, 1, '2023-03-05 01:31:49', 'aaaaaaaaaaaaa', 'testiranje', '', 1),
-(10, 1, '2023-03-05 01:54:59', 'aaaaaaaaaaaaaaa', 'ako ovo ne radi onda', '', 1),
-(11, 1, '2023-03-05 01:56:13', 'aaaaaaaaaaaaaaa', 'ako ovo ne radi onda', '', 1),
-(12, 1, '2023-03-05 01:58:21', 'aaaaaaaaaaaaaaa', 'ako ovo ne radi onda', '', 1),
-(13, 1, '2023-03-09 00:24:36', 'ovo je pokazivanje da radi sve kako treba ', 'pokazivanje', '', 1),
-(14, 1, '2023-03-09 00:24:39', 'ovo je pokazivanje da radi sve kako treba ', 'pokazivanje', '', 1),
-(15, 1, '2023-03-09 00:25:34', 'kjgjgjl', 'vvzxc', '', 1),
-(16, 1, '2023-03-10 16:47:34', 'kjgjgjl', 'vvzxc', '', 1),
-(17, 1, '2023-03-10 16:47:59', 'kjgjgjl', 'vvzxc', '', 1),
-(18, 1, '2023-03-10 16:49:51', 'kjgjgjl', 'vvzxc', '', 1),
-(19, 1, '2023-03-10 16:50:21', 'kjgjgjl', 'vvzxc', '', 1),
-(20, 2, '2023-03-10 16:58:16', 'Isporbavanje da li radi sve kako treba sa lukinog profila', 'testiranje', '', 1),
-(21, 2, '2023-03-10 16:59:09', 'testiranje dodavanje i prikaz posta lukin profil ', 'testiranje', '', 1),
-(22, 2, '2023-03-10 17:54:06', 'ae mile oplodime', 'ide mile', '', 1),
-(23, 1, '2023-03-11 18:56:32', 'poslednji post', 'testiranje', '', 1),
-(24, 1, '2023-03-11 19:05:22', 'ovo je slika ', 'slika', '', 1),
-(25, 1, '2023-03-13 14:03:53', 'aseaeeaea', 'fdadfa', '', 1),
-(26, 1, '2023-03-13 14:04:47', 'aseaeeaea', 'fdadfa', '', 1),
-(27, 1, '2023-03-13 14:05:14', 'aseaeeaea', 'fdadfa', '', 1),
-(28, 1, '2023-03-13 14:05:28', '', '', '', 1),
-(29, 1, '2023-03-13 14:14:41', '', '', '', 1),
-(30, 1, '2023-03-13 14:14:56', '', 'jel radio ovo ', '', 1),
-(31, 1, '2023-03-13 14:16:35', '', 'ada', '', 1),
-(32, 1, '2023-03-13 14:17:20', 'sdads', 'sjdfaskfj;asdf', '', 1),
-(33, 1, '2023-03-14 16:30:14', '2', 'ae pls', '', 1);
+INSERT INTO `post` (`post_id`, `user_id`, `created_datetime`, `caption`, `category`, `uploaded_file`, `file_ext`, `status`) VALUES
+(2, 1, '2023-03-03 00:07:51', 'Ovo je prvi post koji je id usera 1', 'isprobavanje', '', '', 1),
+(3, 2, '2023-03-03 00:09:13', 'ovo je drugi post koji treba da se vidi na time line\r\n', 'isprobavanje', '', '', 1),
+(4, 2, '2023-03-03 00:09:32', 'ovo je drugi post koji treba da se vidi na time line\r\n', 'isprobavanje', '', '', 1),
+(6, 1, '2023-03-03 00:11:11', 'drugi post kod milosa na profilu', 'isprobavanje', '', '', 1),
+(7, 1, '2023-03-05 00:59:03', 'ovo je neki caption', 'testiranje', '', '', 1),
+(77, 1, '2023-04-02 13:05:27', 'prvi put sa headerom bez fjala', 'testiranje', '', '', 1),
+(78, 1, '2023-04-02 13:05:49', 'prvi put sa fajlom', 'testiranje ', '../../uploads/README.md', 'md', 1);
 
 -- --------------------------------------------------------
 
@@ -220,20 +209,17 @@ INSERT INTO `users_comment` (`comment_id`, `user_id`, `post_id`, `comment_text`,
 (53, 1, 6, 'kkokokook', '2023-03-19 17:21:13'),
 (54, 1, 6, 'kkokokook', '2023-03-19 17:21:14'),
 (55, 1, 6, 'kkokokook', '2023-03-19 17:21:14'),
-(56, 1, 2, 'jhjhjj', '2023-03-19 17:27:08'),
-(57, 1, 2, 'jhjhjj', '2023-03-19 17:27:08'),
-(58, 1, 2, 'aaaaaaa', '2023-03-19 17:44:23'),
-(59, 1, 6, 'aaaaaaa', '2023-03-19 17:44:42'),
-(60, 1, 7, 'aaaaaaa', '2023-03-19 17:45:01'),
-(61, 1, 8, 'aaaaaaa', '2023-03-19 17:45:03'),
-(62, 1, 9, 'aaaaaaa', '2023-03-19 17:45:04'),
-(63, 1, 9, 'aaaaaaa', '2023-03-19 17:45:07'),
-(64, 1, 9, 'aaaaaaa', '2023-03-19 17:45:10'),
-(65, 1, 9, 'aaaaa', '2023-03-19 17:47:48'),
-(66, 1, 8, 'dsdsdsd', '2023-03-19 17:47:50'),
-(67, 1, 10, 'ghvhghjghjgjhg', '2023-03-19 17:47:59'),
-(68, 1, 2, 'ide gas ja sambog', '2023-03-19 17:49:15'),
-(69, 1, 2, 'aaaaaaaaaa', '2023-03-20 23:47:17');
+(70, 2, 3, 'komentar lukin na njegovom postu', '2023-03-28 14:04:55'),
+(71, 2, 3, 'komentar lukin na njegovom postu', '2023-03-28 14:05:01'),
+(72, 2, 4, 'haahahahah', '2023-03-28 14:05:07'),
+(75, 2, 2, 'lukin komentar', '2023-03-28 14:14:46'),
+(76, 2, 2, 'lukin komentar', '2023-03-28 14:14:49'),
+(77, 2, 3, 'aaaa', '2023-03-28 14:38:13'),
+(78, 2, 3, 'aaa', '2023-03-28 21:10:28'),
+(79, 1, 2, 'komentar na prvom postu iz ajaxa iz komentara', '2023-03-30 16:30:35'),
+(80, 1, 2, 'komentar na prvom postu iz ajaxa iz komentara', '2023-03-30 16:30:44'),
+(81, 1, 2, 'ide gas ovo zapravo radi ', '2023-03-30 17:09:23'),
+(82, 1, 2, 'ahahahah', '2023-03-30 17:10:48');
 
 --
 -- Indexes for dumped tables
@@ -302,13 +288,13 @@ ALTER TABLE `keyword`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `users_comment`
 --
 ALTER TABLE `users_comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- Constraints for dumped tables
