@@ -126,17 +126,19 @@
               $category=$_POST['category'];
               $caption = $_POST['caption'] ;
               $userid=$_SESSION['iduser'];
-              if(isset($_FILES['file'])){
-              $uploaded=$_FILES['file']['name'];
-              $targetdir="../../uploads/";
-              $file=$targetdir. basename($uploaded);
-              $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
-              if(move_uploaded_file($_FILES['file']['tmp_name'],$file)){
-                $newpost=new Post($datab,$userid,$caption,$category,$file,$file_ext);
-              }
+                  if(isset($_FILES['file'])){
+                  $uploaded=$_FILES['file']['name'];
+                  $targetdir="../../uploads/";
+                  $file=$targetdir. basename($uploaded);
+                  $file_ext = pathinfo($file, PATHINFO_EXTENSION);
+                  if(move_uploaded_file($_FILES['file']['tmp_name'],$file)){
+                    $newpost=new Post($datab,$userid,$caption,$category,$file,$file_ext);
+                  }else{ 
+                    $newpost= new Post($datab,$userid,$caption,$category);}
+                  }
+             
             }
-              $newpost= new Post($datab,$userid,$caption,$category);
-            }
+            header('Location: ../Profile/profile.php');
           }                
           ?>
 
