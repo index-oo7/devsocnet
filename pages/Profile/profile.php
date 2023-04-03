@@ -74,7 +74,6 @@
     
       <div class="col-md-12">
         <div id="counts"> 
-        
           
           <?php
           $idUser=$_SESSION['iduser'];

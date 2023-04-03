@@ -6,7 +6,9 @@
   --section: #e5e5e5;
   --text-complement: #D9C9A7;
 }
-
+a{
+  color: var(--section);
+}
 body{
   background-color: rgb(218, 233, 251);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
