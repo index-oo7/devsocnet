@@ -192,7 +192,7 @@ class Post{
             <br><p>{$fileurl}</p>
             ";//ovde sam stao treba da resim ovo oko uploada i unosa u bazu
             if(!empty($fileurl)){
-                $htmlanswer.="<a target='_blank' href='{$fileurl}' download>Download file</a>";
+                $htmlanswer.="<a target='_blank' href='{$fileurl}' download><i class='fa-solid fa-arrow-down-to-bracket'></i></a>";
             }
             echo $htmlanswer;
         }

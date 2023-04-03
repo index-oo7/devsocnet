@@ -50,10 +50,10 @@ if($fun=="change"){
             // $response=$target_user->changeInfo($iduser,$name,$surname,$nickname,$info);
             $query="UPDATE app_user SET user_name='{$name}', user_surname='{$surname}', user_nickname='{$nickname}',user_info='{$info}' WHERE user_id={$iduser}";
             $res=mysqli_query($db->connect(),$query);
-            $response="Data changed successfully!";
+            $response="<div class='warning'><p>Data changed successfully!</p></div>";
         }
         else{
-            $response="Nickname already exists. Please try with another one.";
+            $response="<div class='warning'><p>Nickname already exists. Please try with another one.</p></div>";
         }
         echo $response;
     }    

@@ -37,12 +37,12 @@
         $password=$_POST['password'];
 
         $db= mysqli_connect("localhost","root","","project_database");
-        $query="SELECT user_id FROM app_user where user_email like ('%{$email}%') and user_password like('%{$password}%')";
+        $query="SELECT user_id FROM app_user where user_email like ('%{$email}%') and user_password='$password'";
         $rez=mysqli_query($db,$query);
         if(mysqli_num_rows($rez)==0){
             echo "<script>
             let warning = document.querySelector('.form');
-            warning.innerHTML += `<br><br><div class='warning'><p>Account does not exist. Please <b><a href='../SignUp/SignUp.php'>SignUp</a></b><br></p></div>`;
+            warning.innerHTML += `<br><br><div class='warning'><p>Account does not exist or the password is incorrect. Please <b><a href='../SignUp/SignUp.php'>SignUp</a></b><br></p></div>`;
             </script>";
         }else{
             $_SESSION['lastlogin']=time();

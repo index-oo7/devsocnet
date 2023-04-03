@@ -14,7 +14,7 @@
     adding.style.display = "block";
     background.style.display = "block";
   }
-  
+
   background.onclick = function() {
     editing.style.display = "none";
     adding.style.display = "none";

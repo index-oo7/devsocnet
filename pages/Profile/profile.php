@@ -1,5 +1,4 @@
 <?php
-
   session_start();
   $sessionTimeout=2700;//45 min
   if(isset($_SESSION['lastlogin'])&&(time()-$_SESSION['lastlogin']>$sessionTimeout)){
@@ -59,8 +58,8 @@
                 <label class='lblProfile'>Info:</label> {$user->getInfo()}<br>
                 <button  type='button' class='btn btn-secondary' id='btnEdit' name='btnEdit'>Edit profile</a>
                 <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow'>Follow</a>"; 
-                
               ?>
+
               </p>
               </div>
           </div>
@@ -75,19 +74,30 @@
     
       <div class="col-md-12">
         <div id="counts"> 
-          <p>Posts</p>
-          <?php
-          // $db=new Database();
-          // $query="SELECT fun_num_of_followers({$SESSION['iduser']})";
-          // $res=mysqli_query($db->connect(),$query);
-          // echo "<p>Followers". $res."</p> ";
-          // mysqli_close($db);
-          // $query1="SELECT fun_num_of_followed({$SESSION['iduser']})";
-         
-          // $res1=mysqli_query($db->connect(),$query1);
+        
           
-          // echo " <p>Following".$res1."</p>";
-          // mysqli_close($db);
+          <?php
+          $idUser=$_SESSION['iduser'];
+          $databa= mysqli_connect("localhost","root","","project_database");
+          $qry="SELECT fun_num_of_posts({$idUser}) as num_of_posts";
+          $rs=mysqli_query($databa,$qry);
+          $row=mysqli_fetch_assoc($rs);
+          $num_of_posts=$row['num_of_posts'];
+          echo "<p>Posts: ".$num_of_posts ."</p>";
+
+          $query="SELECT fun_num_of_followers({$idUser}) as num_of_followers";
+          $res=mysqli_query($databa,$query);
+          $red = mysqli_fetch_assoc($res);
+          $num_of_followers=$red['num_of_followers'];
+          echo "<p>Followers: ".$num_of_followers. "</p>";
+           
+          $query1="SELECT fun_num_of_followed({$idUser}) as num_of_followed";
+          $res1=mysqli_query($databa,$query1);
+          $red1 = mysqli_fetch_assoc($res1);
+          $num_of_followed=$red1['num_of_followed'];
+          echo " <p>Following: ".$num_of_followed."</p>";
+          mysqli_close($databa);
+
           ?>
           
          
@@ -148,21 +158,18 @@
         <!-- Background is shadow shown everytime user invokes popup window -->
         <div id="background"></div>
 
-        <!-- Inicijalni prikaz komentara -->
-        
+        <!-- Initial comment display -->
         <div id="commsecc" style="background-color:black">komentariii</div>
+
         <div id = "works">
           <h1 class="col-md-4">Works</h1>
           <br><br>
           
           <?php
-            $arr_posts=$user->allposts($datab);//ovde mi baca commands out of sync jer pozivam iz baze da mi da idijeve
+            $arr_posts=$user->allposts($datab);
             foreach($arr_posts as $el){
               post::getpost($el,$datab);
               echo"<button id='btncomments' onclick='allcomments({$el})'>Comments</button><hr>";
-              // echo "<input type='text' name='commtxt{$el}' id='commtxt{$el}' placeholder='Comment'><br>
-              // <button id='btncomm' class='btn btn-outline-light' type='submit' onclick='Postcomm({$el},{$_SESSION['iduser']})'>Comment</button>";
-              //ovo this nece da mi prosledi element da bih ga u js uhvatio
             }
           ?>
         </div>
