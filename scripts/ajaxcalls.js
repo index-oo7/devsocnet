@@ -25,5 +25,6 @@ function ChangeInfo(userid){
     let info=$("#info").val();
     $.post("../../ajax/ajax.php?fun=change",{userid:userid,name:name,surname:surname,nickname:nickname,info:info},function(response){
         $("#response").html(response);
-    })
+
+    });
 }

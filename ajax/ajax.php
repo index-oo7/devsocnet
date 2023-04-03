@@ -56,7 +56,7 @@ if($fun=="change"){
             $response="<div class='warning'><p>Nickname already exists. Please try with another one.</p></div>";
         }
         echo $response;
-    }    
+    }   
 }
 
 ?>

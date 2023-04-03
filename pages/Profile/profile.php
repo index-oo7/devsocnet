@@ -158,7 +158,7 @@
         <div id="background"></div>
 
         <!-- Initial comment display -->
-        <div id="commsecc" style="background-color:black">komentariii</div>
+        <div id="commsecc" class="windowComment">komentariii</div>
 
         <div id = "works">
           <h1 class="col-md-4">Works</h1>
@@ -168,7 +168,7 @@
             $arr_posts=$user->allposts($datab);
             foreach($arr_posts as $el){
               post::getpost($el,$datab);
-              echo"<button id='btncomments' onclick='allcomments({$el})'>Comments</button><hr>";
+              echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><hr>";
             }
           ?>
         </div>

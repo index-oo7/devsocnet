@@ -108,6 +108,33 @@ button{
   height: 32px;
   }
 
+.windowComment{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: fit-content;
+  width: 50%;
+  margin-top: 7px;
+  margin-right: 10px;
+  padding: 10px;
+  background-color: var(--highlight);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  animation: fade-in 1s forwards;
+  max-height: 50%;
+  overflow: auto;
+  word-wrap: break-word;
+}
+.windowComment form {
+  color: white;
+  }
+.windowComment textarea{
+  height: 32px;
+  }
+
 #background {
   display: none;
   position: fixed;
