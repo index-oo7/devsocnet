@@ -14,15 +14,15 @@
 <body>
     <div class="container">
         <form action="login.php" method="post" class="form">
-          <h1>Log In</h1>
+            <h1>Log In</h1>
 
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-          <button type="submit" name="btnSubmit">Log In</button>
+            <button type="submit" name="btnSubmit">Log In</button>
         </form>
     </div>
 
