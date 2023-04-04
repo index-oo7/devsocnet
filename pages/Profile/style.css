@@ -5,22 +5,22 @@
   --text: #a7b7d9;
   --section: #e5e5e5;
   --text-complement: #D9C9A7;
-}
+  }
 a{
   color: var(--section);
-}
+  }
 body{
   background-color: rgb(218, 233, 251);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
-}
+  }
 
 button{
   border-radius: 15px;
-}
+  }
 
 .container{
   color: var(--text);
-}
+  }
 
 .profile-pic img {
   border-radius: 50%;
@@ -70,7 +70,7 @@ button{
   color: var(--text);
   width: fit-content;
   height: fit-content;
-}
+  }
 
 #counts{
   margin-top: 7px;
@@ -127,7 +127,7 @@ button{
   max-height: 50%;
   overflow: auto;
   word-wrap: break-word;
-}
+  }
 .windowComment form {
   color: white;
   }
@@ -150,7 +150,7 @@ button{
   background-color: transparent;
   border: none;
   color: inherit;
-}
+  }
 
 #works{
   margin-top: 7px;
@@ -163,16 +163,16 @@ button{
   }
 #works button{
   margin-top: 5px; 
-}
+  }
 #works hr{
   background-color: white;
-}
+  }
 #works h1{
   color: var(--section);
   border-radius: 15px;
   background-color: #1b2c42;
   height: 50px;
-}
+  }
 
 .post{
   color: var(--section);
@@ -180,12 +180,12 @@ button{
   background-color: #1b2c42;
   height: fit-content;
   padding: 5px;
-}
+  }
 
 .date{
   position: relative;
   margin-left: 85%;
-}
+  }
 .warning{
   color: var(--warning);
   background-color: #e8e8e8;
@@ -193,7 +193,7 @@ button{
   padding: 15px;
   height: auto;
   width: fit-content;
-}
+  }
 
 /* SlideUp animacija */
   @keyframes slideup {
