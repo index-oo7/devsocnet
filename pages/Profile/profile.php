@@ -169,7 +169,7 @@
             $arr_posts=$user->allposts($datab);
             foreach($arr_posts as $el){
               post::getpost($el,$datab);
-              echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button>";
+              echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><hr>";
             }
           ?>
         </div>
