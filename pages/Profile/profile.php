@@ -118,6 +118,7 @@
             
           </form>
           <div id="response"></div> 
+          <?php sleep(2);?>
         </div>
 
         <div id="adding" class="window">
