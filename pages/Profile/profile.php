@@ -57,7 +57,9 @@
                 echo "<label class='lblProfile'>Nickname:</label> {$user->getNickname()}<br>
                 <label class='lblProfile'>Info:</label> {$user->getInfo()}<br>
                 <button  type='button' class='btn btn-secondary' id='btnEdit' name='btnEdit'>Edit profile</a>
-                <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow'>Follow</a>"; 
+                 <button  type='button' class='btn btn-secondary' id='btnFollow' name='btnFollow' onclick=Follow(2,'{$user->getEmail()}','{$user->getNickname()}') >Follow</a>"; 
+                 //hardkodovana vrednost dok se ne uvede mogucnost gledanja drugih profila
+                 //unfollow obezbediti 
               ?>
 
               </p>
@@ -188,5 +190,7 @@
 
     <!-- Script file handling popup windows -->
     <script src="script.js"></script>
+
+    
   </body>
 </html>

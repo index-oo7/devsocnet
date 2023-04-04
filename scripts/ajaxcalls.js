@@ -28,3 +28,13 @@ function ChangeInfo(userid){
         //ovde negde treba da stoji timeout da bi se warning zadrzao na ekranu
     });
 }
+
+function Follow(following_user_id,email, nickname){
+    console.log("CAO");
+    $.post("../../ajax/ajax.php?fun=follow",{following_user_id:following_user_id,email:email,nickname:nickname},function(response){
+        $("#btnFollow").html(response);
+    });
+}
+
+
+
