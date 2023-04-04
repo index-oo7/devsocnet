@@ -6,6 +6,20 @@
     --section: #e5e5e5;
     --text-complement: #D9C9A7;
 }
+
+a{
+  color: var(--section);
+  }
+
+body{
+  background-color: rgb(218, 233, 251);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+  }
+
+button{
+  border-radius: 15px;
+  }
+
 .input {
     background-color: #f5f5f5;
     color: #242424;
@@ -36,3 +50,40 @@ input:hover {
     justify-content: center;
     align-items: center;
 }
+
+.post{
+    color: var(--section);
+    border-radius: 15px;
+    background-color: #1b2c42;
+    height: fit-content;
+    padding: 5px;
+    }
+  
+.date{
+    position: relative;
+    margin-left: 85%;
+    }
+
+.window{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: fit-content;
+  width: fit-content;
+  margin-top: 7px;
+  margin-right: 10px;
+  padding: 10px;
+  background-color: var(--highlight);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  animation: fade-in 1s forwards;
+  }
+.window form {
+  color: white;
+  }
+.window textarea{
+  height: 32px;
+  }
