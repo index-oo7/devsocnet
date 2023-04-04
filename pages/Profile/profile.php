@@ -64,7 +64,7 @@
               </div>
           </div>
           <div class="col-md-4">
-            <div class="post">
+            <div class="posting">
               <button id="btnPost" name="btnPost" class="btnTransparent"><i class="fa-regular fa-folder-open fa-6x"></i></button>
             </div>
           </div>
@@ -168,7 +168,7 @@
             $arr_posts=$user->allposts($datab);
             foreach($arr_posts as $el){
               post::getpost($el,$datab);
-              echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><hr>";
+              echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button>";
             }
           ?>
         </div>

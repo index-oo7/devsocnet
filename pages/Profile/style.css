@@ -65,7 +65,7 @@ button{
   animation: slideup 1s ease-out;
   }
 
-.post{
+.posting{
   padding-top: 50px;
   color: var(--text);
   width: fit-content;
@@ -172,6 +172,14 @@ button{
   border-radius: 15px;
   background-color: #1b2c42;
   height: 50px;
+}
+
+.post{
+  color: var(--section);
+  border-radius: 15px;
+  background-color: #1b2c42;
+  height: fit-content;
+  padding: 5px;
 }
 
 .date{

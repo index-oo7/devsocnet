@@ -184,15 +184,16 @@ class Post{
             $txt=$row['caption'];
             $fileurl=$row['uploaded_file'];
             $htmlanswer="";
-            $htmlanswer.="<div>
+            $htmlanswer.="<div class='post'>
             <h5>{$topic}</h5>
             {$txt}<br>
             <div class='date'>{$date}</div>
-            </div>
             <br><p>{$fileurl}</p>
             ";//ovde sam stao treba da resim ovo oko uploada i unosa u bazu
             if(!empty($fileurl)){
-                $htmlanswer.="<a target='_blank' href='{$fileurl}' download><i class='fas fa-cloud-download fa-2x'></i></a>";
+                $htmlanswer.="<a target='_blank' href='{$fileurl}' download><i class='fas fa-cloud-download fa-2x'></i></a></div>";
+            }else{
+                $htmlanswer.="</div>";
             }
             echo $htmlanswer;
         }
