@@ -61,7 +61,7 @@ if($fun=="change"){
 
 if($fun=="follow"){
     if(isset($_POST['following_user_id']) and isset($_POST['email']) and isset($_POST['nickname'])){
-        $db=new Database();
+           $db=new Database();
         $following_user_id=$_POST['following_user_id'];
         $email=$_POST['email'];
         $nickname=$_POST['nickname'];
@@ -75,7 +75,7 @@ if($fun=="follow"){
             $queryForFollow="CALL follow_user({$following_user_id},{$followed_user_id},1)";
             $resForFollow=mysqli_query($db->connect(),$queryForFollow);
             $response="Followed";
-        }
+            }
         else{
             $row=mysqli_fetch_assoc($resForFollowingStatus);
             if($row['following_status']==0){
@@ -86,10 +86,61 @@ if($fun=="follow"){
             else if($row['following_status']==1){
                 $response="already follow";
             }
-        }
+            }
        
-    }
+        }
     echo $response;
-}
+    }
+    
+
+    if($fun="search"){
+        echo"";
+        if(isset($_GET['input'])){
+            $input=$_GET['input'];
+            $type=substr($input,0,1);
+            $input=substr($input,1);
+            if($type=="."){
+                echo"";
+               $db=new Database();
+                $dbc=$db->connect();
+                $query=$dbc->prepare("CALL searchuser(?)");
+                $query->bind_param("s",$input);
+                $query->execute();
+                $res=$query->get_result();
+                if(mysqli_num_rows($res)==0){
+                    echo"<div>User not found</div>";
+                }else{
+                    while($row=mysqli_fetch_assoc($res)){//moze se ostaviti ovde vrednost id da se redirektuje na user.php i tako imamo multypage shit a layout sa profile moze se iskorititi
+                    echo"<div>{$row['user_name']} {$row['user_surname']} {$row['user_nickname']}</div><br><br>";
+                }
+                }
+                $dbc->close();
+    
+            }elseif($type=="/"){
+                $out="";
+                echo $out;
+                $db=new Database();
+                $dbc=$db->connect();
+                $query=$dbc->prepare("CALL searchtopic(?)");
+                $query->bind_param("s",$input);
+                $query->execute();
+                $res=$query->get_result();
+    
+                if(mysqli_num_rows($res)==0){
+                    $out="<div>Topic not found</div>";
+                }else{
+                    while($row=mysqli_fetch_assoc($res)){//moze se ostaviti ovde vrednost id da se redirektuje na user.php i tako imamo multypage shit a layout sa profile moze se iskorititi
+                    $out.="<strong><div>{$row['category']}</strong> <br>". substr($row['caption'],0,40) ."   ".date('d.m.Y.',strtotime($row['created_datetime']))." </div><br>";
+                }
+                }
+                echo $out;
+                $dbc->close();
+            }elseif($type=="#"){
+                echo"keyword to be done";
+            }
+        }
+    
+    
+    }
 
 ?>
