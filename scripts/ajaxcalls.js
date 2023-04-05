@@ -28,3 +28,14 @@ function ChangeInfo(userid){
         //ovde negde treba da stoji timeout da bi se warning zadrzao na ekranu
     });
 }
+function Search(){
+    let input=$("#search").val();
+    $("#search-form").submit(function(event){
+        event.preventDefault();
+        $.get("../../ajax/ajax.php?fun=search",{input:input},function(response){
+            $("#searchresults").html(response);
+        })
+    })
+
+
+}
