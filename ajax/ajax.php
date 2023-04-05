@@ -92,4 +92,26 @@ if($fun=="follow"){
     echo $response;
 }
 
+if($fun=="unfollow"){
+    if(isset($_POST['following_user_id']) and isset($_POST['email']) and isset($_POST['nickname'])){
+        $db=new Database();
+        $following_user_id=$_POST['following_user_id'];
+        $email=$_POST['email'];
+        $nickname=$_POST['nickname'];
+        $query="SELECT user_id FROM app_user WHERE user_email='{$email}' and user_nickname='{$nickname}'";
+        $res=mysqli_query($db->connect(),$query);
+        $red=mysqli_fetch_assoc($res);
+        $followed_user_id=$red['user_id'];
+        $queryForFollowingStatus="SELECT following_status FROM follower WHERE following_user_id={$following_user_id} AND followed_user_id={$followed_user_id}";
+        $resForFollowingStatus=mysqli_query($db->connect(),$queryForFollowingStatus);
+        $row=mysqli_fetch_assoc($resForFollowingStatus);
+        if($row['following_status']==1){
+            $queryForUnfollow="CALL unfollow_user({$following_user_id},{$followed_user_id})";
+            $resForUnfollow=mysqli_query($db->connect(),$queryForUnfollow);
+            $response="Unfollowed successfully";
+        }
+    }
+    echo $response;
+}
+
 ?>
