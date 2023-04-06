@@ -32,13 +32,12 @@
 
     </head>
     <body>
-        <div id="searchBar"><input class="input" name="text" placeholder="Search..." type="search"></div>
-
-
-
-
-
-
+        <div class = "container">
+            <div class = "col-md-12">
+                <div id="searchBar"><input class="input" name="text" placeholder="Search..." type="search"><button id="btnSearch"><i class="fas fa-search"></i></button></div>
+                <div class = "TimelinePost"></div>
+            </div>
+        </div>
 
 
 

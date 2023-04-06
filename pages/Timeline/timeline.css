@@ -51,7 +51,7 @@ input:hover {
     align-items: center;
 }
 
-.post{
+.TimelinePost{
     color: var(--section);
     border-radius: 15px;
     background-color: #1b2c42;
