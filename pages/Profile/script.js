@@ -15,6 +15,7 @@
   function ShowComments(){
     comments.style.display = "block";
     background.style.display = "block";
+    document.body.style.overflow = "hidden";
   }
 
   btnEdit.onclick = function(){
@@ -32,4 +33,5 @@
     editing.style.display = "none";
     adding.style.display = "none";
     background.style.display = "none";
+    document.body.style.overflow = "auto";
   }
