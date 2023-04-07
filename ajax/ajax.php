@@ -164,5 +164,21 @@ if($fun=="unfollow"){
     }
     echo $response;
 }
+// if(fun=="like"){
+//     if(isset($_GET['postid']) and isset($_GET['userid']) ){
+//         $postid=$_GET['postid'];
+//         $userid=$_GET['userid'];
+//         $db=new Database();
+//         $dbc=$db->connect();
+//         $query=$dbc->prepare("CALL checklike(?,?)");
+//         $query->bind_param("ii",$postid,$userid);
+//         $query->execute();
+//         $res=$query->get_result();
 
+//         if(mysqli_num_rows($res)==0){
+
+//         }
+//     }
+
+// }
 ?>

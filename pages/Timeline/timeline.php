@@ -34,8 +34,45 @@
     <body>
         <div class = "container">
             <div class = "col-md-12">
-                <div id="searchBar"><input class="input" name="text" placeholder="Search..." type="search"><button id="btnSearch"><i class="fas fa-search"></i></button></div>
-                <div class = "TimelinePost"></div>
+                <div id="searchBar">
+                    <form id="search-form" method="GET" action="profile.php">
+                     <input type="text" name="search" id="search" placeholder=" .user /topic #keyword">
+                     <button type="submit" id="btnSearch" onclick="Search()" ><i class="fas fa-search"></i></button>
+                    </form>
+                    <div id="searchresults">
+
+                    </div>    
+                
+                    
+            </div>
+            <div class = "TimelinePost">postovi
+                <?php
+                $ids=array();
+                $dbc=$datab->connect();
+                $query=$dbc->prepare("CALL ifollowthem(?)");
+                $query->bind_param("i",$_SESSION['iduser']);
+                $query->execute();
+                $res=$query->get_result();
+                while($row=mysqli_fetch_assoc($res)){
+                    array_push($ids,$row['following_user_id']);
+                }
+                $dbc->close();
+                $users=array();
+                foreach($ids as $uid){
+                    $userin=new User($datab,$uid);
+                    array_push($users,$userin);
+                }
+                 //mozes ovde da koristis od posta vrv created time samo vidi ovo $el to ti je post id i po tome mozes da uvatis niz ili kako vec hoces ili direktno u bazi moze da se to sortira po datumu ono order by asc..
+                foreach($users as $u){                 
+                    $arr_posts=$u->allposts($datab);
+                    foreach($arr_posts as $el){
+                        echo"<br>{$u->getNickname()}<br>";
+                      post::getpost($el,$datab);
+                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><p id='likecounter'></p><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr>";
+                    }
+                }
+
+                ?>
             </div>
         </div>
 
