@@ -58,5 +58,6 @@ function Search(){
 function Like(postid,userid){
     $.get("../../ajax/ajax.php?fun=like",{postid:postid,userid:userid},function(response){
         $("#likecounter").html(response);
-    })
-}
+        console.log(response);
+    });
+}   

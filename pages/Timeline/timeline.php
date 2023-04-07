@@ -68,7 +68,7 @@
                     foreach($arr_posts as $el){
                         echo"<br>{$u->getNickname()}<br>";
                       post::getpost($el,$datab);
-                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><p id='likecounter'></p><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr>";
+                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><div id='likecounter' name='likecounter'>iiii</div><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr><br>";
                     }
                 }
 
@@ -113,6 +113,6 @@
     <script src="../../scripts/ajaxcalls.js"></script>
 
     <!-- Script file handling popup windows -->
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
     </body>
 </html>

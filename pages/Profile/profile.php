@@ -46,6 +46,8 @@
             </div>
           </div>
           <div class="col-md-4">
+            
+           <a href='../Timeline/timeline.php'>Timeline</a>
             <div class="profile-info">
               <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
               <ul class="list-unstyled">
@@ -68,6 +70,7 @@
           </div>
           <div class="col-md-4">
             <div class="posting">
+        
               <button id="btnPost" name="btnPost" class="btnTransparent"><i class="fa-regular fa-folder-open fa-6x"></i></button>
             </div>
           </div>
