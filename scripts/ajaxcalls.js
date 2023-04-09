@@ -1,4 +1,5 @@
-$(document).ready(function(){});
+$(document).ready(function(){
+});
 
 function Postcomm(postid,userid){
     let divname="commented"+postid;

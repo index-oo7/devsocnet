@@ -1,6 +1,8 @@
 <?php
 require_once '../models/classes.php';
 session_start();
+
+
 $fun=$_GET['fun'];
 if($fun=="comment"){
     if(isset($_POST['iduser']) and isset ($_POST['commtxt'])and isset($_POST['postid'])){
@@ -166,7 +168,41 @@ if($fun=="unfollow"){
 }
 if($fun="like"){
     if(isset($_GET['postid']) and isset($_GET['userid'])){
+        $postid=$_GET['postid'];
+        $userid=$_GET['userid'];
+        $db=new Database();
+        $flag=0;
         
+        $dbc=$db->connect();
+        $query=$dbc->prepare("Call checklike(?,?)");
+        $query->bind_param("ii",$postid,$userid);
+        $query->execute();
+        $res=$query->get_result();
+        if(mysqli_num_rows($res)==0){
+           $flag=1; //not liked 
+        }else{
+            $flag=2;//liked
+        }
+        $dbc->close();
+
+        if($flag==1){
+        
+            $dbc=$db->connect();
+            $query=$dbc->prepare("call insertlike(?,?)");
+            $query->bind_param("ii",$postid,$userid); 
+            $query->execute();
+            $dbc->close();//ubacivanje like u bazu
+            $numlikes=Post::getlikes($postid); 
+            echo"$numlikes";    //ponovno prebrojavanje
+        }else if($flag==2){
+            $dbc=$db->connect();
+            $query=$dbc->prepare("call deletelike(?,?)");
+            $query->bind_param("ii",$postid,$userid); 
+            $query->execute();
+            $dbc->close();//brisanje iz baze
+            $numlikes=Post::getlikes($postid); 
+            echo"$numlikes"; 
+        }
     }
 }
 ?>

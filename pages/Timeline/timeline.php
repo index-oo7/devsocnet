@@ -68,7 +68,9 @@
                     foreach($arr_posts as $el){
                         echo"<br>{$u->getNickname()}<br>";
                       post::getpost($el,$datab);
-                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><div id='likecounter' name='likecounter'>iiii</div><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr><br>";
+                     
+                      $numlikes=Post::getlikes($el);
+                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><div id='likecounter' name='likecounter' onload='javascript:'>{$numlikes}</div><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr><br>";
                     }
                 }
 

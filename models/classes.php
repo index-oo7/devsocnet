@@ -199,6 +199,17 @@ class Post{
         }
         $dbc->close();
     }
+    public static function getlikes($postid){
+        $db=new Database();
+        $dbc=$db->connect();
+        $query=$dbc->prepare("CALL getlikesofpost(?)");
+        $query->bind_param("i",$postid);
+        $query->execute();
+        $res=$query->get_result();
+        $row=$res->fetch_row();
+        return $row[0];
+        $dbc->close();
+    }
 }
 
 class Comment{
