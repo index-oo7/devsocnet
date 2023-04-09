@@ -12,6 +12,14 @@ function Postcomm(postid,userid){
         })
     }
 }
+function Like(postid,userid){
+    let pname="likecounter"+postid;
+    
+    $.get("../../ajax/ajax.php?fun=like",{postid:postid,userid:userid},function(response){
+        $('[id="' + pname + '"]').html(response);
+        console.log(response);
+    });
+} 
 function allcomments(postid){
     $.post("../../ajax/ajax.php?fun=commentsbypost",{postid:postid},function(response){
         $("#commsecc").html(response);
@@ -56,9 +64,4 @@ function Search(){
 
 
 }
-function Like(postid,userid){
-    $.get("../../ajax/ajax.php?fun=like",{postid:postid,userid:userid},function(response){
-        $("#likecounter").html(response);
-        console.log(response);
-    });
-}   
+  

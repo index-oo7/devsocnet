@@ -178,13 +178,17 @@ if($fun="like"){
         $query->bind_param("ii",$postid,$userid);
         $query->execute();
         $res=$query->get_result();
-        if(mysqli_num_rows($res)==0){
-           $flag=1; //not liked 
-        }else{
-            $flag=2;//liked
+        $numrows=mysqli_num_rows($res);
+        if($numrows==0){
+           $flag=1; 
+           echo"br redova $numrows<br>";//not liked 
+        }else if($numrows!=0){
+            $flag=2; //liked
+            echo"br redova $numrows<br>";
+           
         }
         $dbc->close();
-
+         
         if($flag==1){
         
             $dbc=$db->connect();
@@ -203,6 +207,7 @@ if($fun="like"){
             $numlikes=Post::getlikes($postid); 
             echo"$numlikes"; 
         }
+
     }
 }
 ?>

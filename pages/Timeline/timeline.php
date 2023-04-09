@@ -70,7 +70,7 @@
                       post::getpost($el,$datab);
                      
                       $numlikes=Post::getlikes($el);
-                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><div id='likecounter' name='likecounter' onload='javascript:'>{$numlikes}</div><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr><br>";
+                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><div id='likecounter{$el}' name='likecounter'>{$numlikes}</div><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr><br>";
                     }
                 }
 
