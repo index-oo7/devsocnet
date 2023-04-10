@@ -46,6 +46,23 @@
                     
             </div>
             <div class = "TimelinePost">postovi
+            <?php
+            $dbCategory=$datab->connect();
+            $queryForCategories="SELECT DISTINCT category FROM post";
+            $result=mysqli_query($dbCategory,$queryForCategories);
+            ?> 
+            <form method="post">     
+<select id="selectCategory" >
+    <option value=0>--Choose category--</option>
+    <?php
+        while($row=mysqli_fetch_assoc($result)){
+            echo "<option value='" .$row["category"]. "'>".$row["category"]."</option>";
+        }
+    ?>
+</select>  
+<?php echo "<button type='submit' onclick='getSelectedData({$_SESSION['iduser']})'>Sort</button>"?>
+    </form>  
+
                 <?php
                 $ids=array();
                 $dbc=$datab->connect();
