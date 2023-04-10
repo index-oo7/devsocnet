@@ -63,7 +63,7 @@
 <?php echo "<button type='submit' onclick='getSelectedData({$_SESSION['iduser']})'>Sort</button>"?>
     </form>  
 
-                <?php
+    <?php
                 $ids=array();
                 $dbc=$datab->connect();
                 $query=$dbc->prepare("CALL ifollowthem(?)");
@@ -91,7 +91,7 @@
                     }
                 }
 
-                ?>
+                ?> 
             </div>
         </div>
 

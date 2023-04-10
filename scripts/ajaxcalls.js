@@ -67,9 +67,8 @@ function Search(){
 
 
 function getSelectedData(following_user_id){
-    let selectList=document.getElementById("selectCategory");
-    console.log(following_user_id);
-    let selected=selectList.options[selectList.selectedIndex].value; 
+    let selected=$("#selectCategory").val();
+    console.log(selected);
     $.post("../../ajax/ajax.php?fun=sortbyCategory",{selected:selected,following_user_id:following_user_id},function(response){
         $(".TimelinePost").html(response);
     });        

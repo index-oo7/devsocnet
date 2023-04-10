@@ -226,9 +226,9 @@ if($fun=="sortByCategory"){
         else{
             $response="No results found.";
         }
-       
+        echo $response;
     }
-    echo $response;
+    
 }
 
 
