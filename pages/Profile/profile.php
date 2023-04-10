@@ -46,6 +46,8 @@
             </div>
           </div>
           <div class="col-md-4">
+            
+           <a href='../Timeline/timeline.php'>Timeline</a>
             <div class="profile-info">
               <h1><?php echo"{$user->getName()} {$user->getSurname()}"?></h1>
               <ul class="list-unstyled">
@@ -68,6 +70,7 @@
           </div>
           <div class="col-md-4">
             <div class="posting">
+        
               <button id="btnPost" name="btnPost" class="btnTransparent"><i class="fa-regular fa-folder-open fa-6x"></i></button>
             </div>
           </div>
@@ -195,3 +198,28 @@
     
   </body>
 </html>
+<!-- DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checklike`(IN `userid` INT, IN `postid` INT)
+BEGIN
+	SELECT * from reaction WHERE user_id=userid and post_id=postid;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deletelike`(IN `postid` INT, IN `userid` INT)
+BEGIN
+   IF EXISTS(select * from reaction where post_id = postid AND user_id = userid) THEN
+   	DELETE FROM reaction WHERE post_id = postid AND user_id = userid;
+    end if;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertlike`(IN `postid` INT, IN `userid` INT)
+BEGIN
+IF NOT EXISTS (SELECT * FROM reaction WHERE post_id = postid AND user_id = userid) THEN
+       INSERT INTO reaction (user_id,post_id) VALUES(userid,postid);
+    END IF;
+	
+END$$
+DELIMITER ; -->

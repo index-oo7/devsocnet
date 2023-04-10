@@ -46,6 +46,23 @@
                     
             </div>
             <div class = "TimelinePost">postovi
+            <?php
+            $dbCategory=$datab->connect();
+            $queryForCategories="SELECT DISTINCT category FROM post";
+            $result=mysqli_query($dbCategory,$queryForCategories);
+            ?> 
+            <form method="post">     
+<select id="selectCategory" >
+    <option value=0>--Choose category--</option>
+    <?php
+        while($row=mysqli_fetch_assoc($result)){
+            echo "<option value='" .$row["category"]. "'>".$row["category"]."</option>";
+        }
+    ?>
+</select>  
+<?php echo "<button type='submit' onclick='getSelectedData({$_SESSION['iduser']})'>Sort</button>"?>
+    </form>  
+
                 <?php
                 $ids=array();
                 $dbc=$datab->connect();
@@ -68,7 +85,9 @@
                     foreach($arr_posts as $el){
                         echo"<br>{$u->getNickname()}<br>";
                       post::getpost($el,$datab);
-                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><p id='likecounter'></p><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr>";
+                     
+                      $numlikes=Post::getlikes($el);
+                      echo"<button id='btncomments' onclick='allcomments({$el}); ShowComments()'><i class='fas fa-comment'></i></button><div id='likecounter{$el}' name='likecounter'>{$numlikes}</div><button onclick='Like({$el},{$_SESSION['iduser']})'>like</button><hr><br>";
                     }
                 }
 
@@ -113,6 +132,6 @@
     <script src="../../scripts/ajaxcalls.js"></script>
 
     <!-- Script file handling popup windows -->
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
     </body>
 </html>

@@ -1,4 +1,5 @@
-$(document).ready(function(){});
+$(document).ready(function(){
+});
 
 function Postcomm(postid,userid){
     let divname="commented"+postid;
@@ -11,6 +12,14 @@ function Postcomm(postid,userid){
         })
     }
 }
+function Like(postid,userid){
+    let pname="likecounter"+postid;
+    
+    $.get("../../ajax/ajax.php?fun=like",{postid:postid,userid:userid},function(response){
+        $('[id="' + pname + '"]').html(response);
+        console.log(response);
+    });
+} 
 function allcomments(postid){
     $.post("../../ajax/ajax.php?fun=commentsbypost",{postid:postid},function(response){
         $("#commsecc").html(response);
@@ -55,8 +64,13 @@ function Search(){
 
 
 }
-function Like(postid,userid){
-    $.get("../../ajax/ajax.php?fun=like",{postid:postid,userid:userid},function(response){
-        $("#likecounter").html(response);
-    })
+
+
+function getSelectedData(following_user_id){
+    let selectList=document.getElementById("selectCategory");
+    console.log(following_user_id);
+    let selected=selectList.options[selectList.selectedIndex].value; 
+    $.post("../../ajax/ajax.php?fun=sortbyCategory",{selected:selected,following_user_id:following_user_id},function(response){
+        $(".TimelinePost").html(response);
+    });        
 }
