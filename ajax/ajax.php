@@ -212,7 +212,7 @@ if($fun=="like"){
 }
 
 if($fun=="sortByCategory"){
-    if(isset($_GET['selected'])){
+    if(isset($_GET['selected']) && isset($_GET['following_user_id'])){
         $db=new Database();
         $category=$_GET['selected'];
         $following_user_id=$_GET['following_user_id'];
@@ -226,9 +226,9 @@ if($fun=="sortByCategory"){
         else{
             $response="No results found.";
         }
-        echo $response;
+       
     }
-    
+    echo $response;
 }
 
 

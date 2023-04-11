@@ -69,7 +69,7 @@ function Search(){
 function getSelectedData(following_user_id){
     let selected=$("#selectCategory").val();
     console.log(selected);
-    $.post("../../ajax/ajax.php?fun=sortbyCategory",{selected:selected,following_user_id:following_user_id},function(response){
-        $(".TimelinePost").html(response);
+    $.get("../../ajax/ajax.php?fun=sortbyCategory",{selected:selected,following_user_id:following_user_id},function(response){
+        $("#TimelinePost").html(response);
     });        
 }
