@@ -183,13 +183,17 @@ class Post{
             $date=date('d.m.Y.',strtotime($time));
             $txt=$row['caption'];
             $fileurl=$row['uploaded_file'];
+            $id=$row['user_id'];
             $htmlanswer="";
             $htmlanswer.="<div class='post'>
+            <h5><a href='../Timeline/profileLink.php?id=2'>{$row['user_nickname']}</a></h5>
+            <hr>
             <h5>{$topic}</h5>
             {$txt}<br>
             <div class='date'>{$date}</div>
-            <br><p>{$fileurl}</p>
-            ";//ovde sam stao treba da resim ovo oko uploada i unosa u bazu
+            <br><p>{$fileurl}</p><br>
+            <div class='upvote'><i class='fas fa-angle-up fa-lg'></i><i class='fas fa-angle-double-up fa-2x'></i></div>
+            ";//ovde sam stao treba da resim ovo oko uploada i unosa u bazu UMESTO 2 STAVITI {$id}
             if(!empty($fileurl)){
                 $htmlanswer.="<a target='_blank' href='{$fileurl}' download><i class='fas fa-cloud-download fa-2x'></i></a></div>";
             }else{
