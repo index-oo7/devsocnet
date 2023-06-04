@@ -206,7 +206,7 @@ END$$
 DELIMITER ;
 
 DELIMITER  $$
-CREATE  DEFINER=`root`@`localhost` PROCEDURE `deletelike`(IN `postid` INT, IN `userid` INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deletelike`(IN `postid` INT, IN `userid` INT)
 BEGIN
    IF EXISTS(select * from reaction where post_id = postid AND user_id = userid) THEN
    	DELETE FROM reaction WHERE post_id = postid AND user_id = userid;
